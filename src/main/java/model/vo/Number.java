@@ -11,8 +11,8 @@ public enum Number {
     EIGHT(8),
     NINE(9),
     JACK(10),
-    QUEEN(11),
-    KING(12);
+    QUEEN(10),
+    KING(10);
 
     private final int value;
 
