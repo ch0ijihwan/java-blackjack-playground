@@ -48,6 +48,6 @@ class NumberTest {
         int actualNumber = number.getValue();
 
         //then
-        assertThat(actualNumber).isEqualTo(expectedNumber );
+        assertThat(actualNumber).isEqualTo(expectedNumber);
     }
 }
