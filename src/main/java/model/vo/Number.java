@@ -16,7 +16,7 @@ public enum Number {
 
     private final int value;
 
-    Number(int number) {
+    Number(final int number) {
         this.value = number;
     }
 
