@@ -42,7 +42,7 @@ class NumberTest {
     void getValue() {
         //given
         Number number = Number.ACE;
-        int expectedNumber = 1;
+        int expectedNumber = 11;
 
         //when
         int actualNumber = number.getValue();
