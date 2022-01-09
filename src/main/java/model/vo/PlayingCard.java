@@ -2,17 +2,17 @@ package model.vo;
 
 import java.util.Objects;
 
-public class Card {
+public class PlayingCard {
     private final Suit suit;
     private final Number number;
 
-    private Card(final Suit suit, final Number number) {
+    private PlayingCard(final Suit suit, final Number number) {
         this.suit = suit;
         this.number = number;
     }
 
-    public static Card makeCard(final Suit suit, final Number number) {
-        return new Card(suit, number);
+    public static PlayingCard makeCard(final Suit suit, final Number number) {
+        return new PlayingCard(suit, number);
     }
 
     public boolean isAce() {
@@ -27,7 +27,7 @@ public class Card {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Card card = (Card) o;
+        PlayingCard card = (PlayingCard) o;
         return suit == card.suit && number == card.number;
     }
 
