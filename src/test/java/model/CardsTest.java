@@ -18,8 +18,6 @@ import static model.vo.PlayingCard.makeCard;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class CardsTest {
-    private static final int FIRST_INDEX = 0;
-    private static final int SECOND_INDEX = 1;
     private Cards cards;
 
     @BeforeEach
