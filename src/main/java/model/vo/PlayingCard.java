@@ -23,6 +23,10 @@ public class PlayingCard {
         return this.number;
     }
 
+    public int getNumberValue() {
+        return this.number.getValue();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
