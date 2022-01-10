@@ -22,7 +22,8 @@ class CardsTest {
 
     @BeforeEach
     void setUp() {
-        List<PlayingCard> initialCards = new ArrayList<>(List.of(makeCard(Suit.SPADE, Number.ACE), makeCard(Suit.HEART, Number.SEVEN)));
+        List<PlayingCard> initialCards
+                = new ArrayList<>(List.of(makeCard(Suit.SPADE, Number.ACE), makeCard(Suit.HEART, Number.SEVEN)));
         cards = new Cards(initialCards);
     }
 
