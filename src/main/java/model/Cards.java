@@ -11,7 +11,7 @@ public class Cards {
     private int notChangedAceCount = 0;
     private static final int DIFFERENCE_IN_CHANGE_OF_ACE = 10;
 
-    public Cards(List<PlayingCard> inputtedPlayingCards) {
+    public Cards(final List<PlayingCard> inputtedPlayingCards) {
         playingCards = inputtedPlayingCards;
         calculateInitAceCount(inputtedPlayingCards);
         calculateTotalScore();
