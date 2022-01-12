@@ -1,6 +1,6 @@
-package model;
+package model.card;
 
-import model.vo.PlayingCard;
+import model.card.vo.PlayingCard;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

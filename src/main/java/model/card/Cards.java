@@ -1,6 +1,6 @@
-package model;
+package model.card;
 
-import model.vo.PlayingCard;
+import model.card.vo.PlayingCard;
 
 import java.util.List;
 import java.util.Objects;

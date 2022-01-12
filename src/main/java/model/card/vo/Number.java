@@ -1,4 +1,4 @@
-package model.vo;
+package model.card.vo;
 
 public enum Number {
     ACE(11),

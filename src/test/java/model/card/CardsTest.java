@@ -1,8 +1,8 @@
-package model;
+package model.card;
 
-import model.vo.Number;
-import model.vo.PlayingCard;
-import model.vo.Suit;
+import model.card.vo.Number;
+import model.card.vo.PlayingCard;
+import model.card.vo.Suit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,7 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static model.vo.PlayingCard.makeCard;
+import static model.card.vo.PlayingCard.makeCard;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class CardsTest {

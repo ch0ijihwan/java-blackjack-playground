@@ -1,13 +1,13 @@
-package model;
+package model.card;
 
-import model.vo.Number;
-import model.vo.PlayingCard;
-import model.vo.Suit;
+import model.card.vo.Number;
+import model.card.vo.PlayingCard;
+import model.card.vo.Suit;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static model.vo.PlayingCard.makeCard;
+import static model.card.vo.PlayingCard.makeCard;
 
 public class Deck {
     private static final int FIRST_INDEX = 0;
