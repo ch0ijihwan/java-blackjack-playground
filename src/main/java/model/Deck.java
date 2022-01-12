@@ -4,10 +4,7 @@ import model.vo.Number;
 import model.vo.PlayingCard;
 import model.vo.Suit;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static model.vo.PlayingCard.makeCard;
@@ -38,5 +35,25 @@ public class Deck {
 
     public List<PlayingCard> startingDraw() {
         return List.of(draw(), draw());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Deck deck = (Deck) o;
+        return Objects.equals(cards, deck.cards);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(cards);
+    }
+
+    @Override
+    public String toString() {
+        return "Deck{" +
+                "cards=" + cards +
+                '}';
     }
 }
