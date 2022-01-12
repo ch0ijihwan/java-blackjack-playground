@@ -53,7 +53,7 @@ public class Cards {
         return notChangedAceCount > 0;
     }
 
-    public boolean isOver21() {
+    public boolean isBurst() {
         return score > 21;
     }
 

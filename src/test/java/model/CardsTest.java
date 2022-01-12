@@ -97,7 +97,7 @@ class CardsTest {
         cards.add(makeCard(Suit.SPADE, inputtedNumber));
 
         //when
-        boolean actual = cards.isOver21();
+        boolean actual = cards.isBurst();
 
         //then
         assertThat(actual).isEqualTo(expect);
