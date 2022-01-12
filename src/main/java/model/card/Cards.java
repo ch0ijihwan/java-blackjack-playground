@@ -42,6 +42,10 @@ public class Cards {
         return score;
     }
 
+    public List<PlayingCard> getCards(){
+        return playingCards;
+    }
+
     public void changeAceScore() {
         if (notChangedAceCount > 0) {
             score = score - DIFFERENCE_IN_CHANGE_OF_ACE;
