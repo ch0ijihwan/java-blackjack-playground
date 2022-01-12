@@ -124,4 +124,16 @@ class CardsTest {
         //then
         assertThat(actual).isEqualTo(expect);
     }
+
+    @Test
+    @DisplayName("getCards() 호출 시, 카드들을 반환한다..")
+    void getCards() {
+        //given
+        List<PlayingCard> expectedCards = List.of(makeCard(Suit.SPADE, Number.ACE), makeCard(Suit.HEART, Number.SEVEN));
+        //when
+        List<PlayingCard> actual = cards.getCards();
+
+        //then
+        assertThat(actual).isEqualTo(expectedCards);
+    }
 }
