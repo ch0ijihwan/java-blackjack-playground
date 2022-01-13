@@ -10,7 +10,7 @@ public class Name {
         this.value = value;
     }
 
-    private void validateNameIsNotBlank(String value) {
+    private void validateNameIsNotBlank(final String value) {
         if (value.length() == 0) {
             throw new IllegalArgumentException("이름은 공백이 될 수 없습니다.");
         }
