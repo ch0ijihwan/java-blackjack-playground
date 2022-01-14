@@ -11,7 +11,7 @@ public class BattingMoney {
     }
 
     private void validateBattingMoney(final int value) {
-        if (value < 0) {
+        if (value <= 0) {
             throw new IllegalArgumentException("배팅 금액은 양수여야 합니다.");
         }
     }
