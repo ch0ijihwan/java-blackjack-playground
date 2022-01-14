@@ -18,7 +18,8 @@ public class Deck {
         List<List<PlayingCard>> cardsListBySuit = Arrays.stream(Suit.values())
                 .map(this::createNumberCards)
                 .collect(Collectors.toUnmodifiableList());
-        cards = cardsListBySuit.stream().flatMap(Collection::stream)
+        cards = cardsListBySuit.stream()
+                .flatMap(Collection::stream)
                 .collect(Collectors.toList());
         Collections.shuffle(cards);
     }
