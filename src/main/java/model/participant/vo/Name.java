@@ -5,13 +5,13 @@ import java.util.Objects;
 public class Name {
     private final String value;
 
-    public Name(String value) {
+    public Name(final String value) {
         validateNameIsNotBlank(value);
         this.value = value;
     }
 
     private void validateNameIsNotBlank(final String value) {
-        if (value.length() == 0) {
+        if (value.isBlank()) {
             throw new IllegalArgumentException("이름은 공백이 될 수 없습니다.");
         }
     }
