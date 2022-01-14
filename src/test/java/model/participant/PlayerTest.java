@@ -9,7 +9,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
@@ -73,48 +72,12 @@ class PlayerTest {
     }
 
     @ParameterizedTest
-    @DisplayName("canDrawCard() 호출 시, 플레이어가 카드를 더 뽑을 수 있다면 true 를 반환한다.")
-    @CsvSource(value = {"TWO:true", "THREE:false"}, delimiter = ':')
-    void canDrawCard(Number number, boolean expect) {
-        //given
-        player.draw(makeCard(Suit.HEART, number));
-
-        //when
-        boolean actual = player.canDrawCard();
-
-        //then
-        assertThat(actual).isEqualTo(expect);
-    }
-
-    @Test
-    @DisplayName("stay() 호출 시, 플레이어의 상태를 stay 로 변환한다.")
-    void stay() {
-        //when
-        player.stay();
-
-        //then
-        assertThat(player).extracting("isStay")
-                .isEqualTo(true);
-    }
-
-    @Test
-    @DisplayName("isStay() 호출 시, 플레이어의 상태가 stay 일 경우 true 를 반환한다.")
-    void isStay() {
-        //when
-        player.stay();
-        boolean actual = player.isStay();
-
-        //then
-        assertThat(actual).isTrue();
-    }
-
-    @ParameterizedTest
     @DisplayName("battle() 호출 시, 파라미터로부터 입력 받은 카드리스트(딜러)와 본인(플레이어)의 카드를 비교한다." +
             "이 비교 결과에 따라 배당금을 반한다.")
     @MethodSource("DealerCardsAndExpectedDividendsProvider")
-    void battle(Cards dealerCards, int expectedDividends){
+    void battle(final Cards dealerCards,final int expectedDividends) {
         //when
-        int actualDividends =  player.battle(dealerCards);
+        int actualDividends = player.battle(dealerCards);
 
         //then
         assertThat(actualDividends).isEqualTo(expectedDividends);
