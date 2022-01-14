@@ -2,6 +2,7 @@ package model.card;
 
 import model.card.vo.PlayingCard;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -11,9 +12,9 @@ public class Cards {
     private int notChangedAceCount = 0;
     private static final int DIFFERENCE_IN_CHANGE_OF_ACE = 10;
 
-    public Cards(final List<PlayingCard> inputtedPlayingCards) {
-        playingCards = inputtedPlayingCards;
-        calculateInitAceCount(inputtedPlayingCards);
+    public Cards(final List<PlayingCard> initPlayingCards) {
+        playingCards = new ArrayList<>(initPlayingCards);
+        calculateInitAceCount(initPlayingCards);
         calculateTotalScore();
     }
 
@@ -35,6 +36,21 @@ public class Cards {
         }
         playingCards.add(inputtedCard);
         calculateTotalScore();
+
+        if (isBurst() && hasAce()) {
+            changeAceScore();
+        }
+    }
+
+    private void changeAceScore() {
+        if (notChangedAceCount > 0) {
+            score = score - DIFFERENCE_IN_CHANGE_OF_ACE;
+            notChangedAceCount--;
+        }
+    }
+
+    private boolean hasAce() {
+        return notChangedAceCount > 0;
     }
 
 
@@ -42,19 +58,9 @@ public class Cards {
         return score;
     }
 
-    public List<PlayingCard> getCards(){
+
+    public List<PlayingCard> getCards() {
         return playingCards;
-    }
-
-    public void changeAceScore() {
-        if (notChangedAceCount > 0) {
-            score = score - DIFFERENCE_IN_CHANGE_OF_ACE;
-            notChangedAceCount--;
-        }
-    }
-
-    public boolean hasAce() {
-        return notChangedAceCount > 0;
     }
 
     public boolean isBurst() {
@@ -80,8 +86,6 @@ public class Cards {
 
     @Override
     public String toString() {
-        return "Cards{" +
-                "playingCards=" + playingCards +
-                '}';
+        return String.join(",", playingCards.toString());
     }
 }
