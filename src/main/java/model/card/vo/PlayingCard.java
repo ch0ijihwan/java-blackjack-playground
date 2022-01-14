@@ -42,9 +42,6 @@ public class PlayingCard {
 
     @Override
     public String toString() {
-        return "Card{" +
-                "suit=" + suit +
-                ", number=" + number +
-                '}';
+        return suit.toString() + number.getValue();
     }
 }
