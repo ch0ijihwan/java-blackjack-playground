@@ -3,6 +3,7 @@ package view.output;
 import java.util.List;
 
 public class OutputDisplay {
+    private OutputDisplay() {}
     public static void showMessageAskNames() {
         System.out.println("게임에 참여할 사람의 이름을 입력하세요.(쉼표 기준으로 분리)");
     }

@@ -3,7 +3,10 @@ package view.input;
 import java.util.Scanner;
 
 public class InputDisplay {
-    private static final Scanner SCANNER  = new Scanner(System.in);
+    private InputDisplay() {
+    }
+
+    private static final Scanner SCANNER = new Scanner(System.in);
 
     public static String[] inputPlayerNames() {
         return SCANNER.nextLine().split(",");
