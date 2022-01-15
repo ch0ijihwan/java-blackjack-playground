@@ -14,36 +14,42 @@ import static view.output.OutputDisplay.*;
 public class Controller {
     private final Deck deck = new Deck();
     private final Dealer dealer = new Dealer(deck.startingDraw());
+    private int dealersDividends;
 
     public Controller() {
         showMessageAskNames();
         String[] inputtedPlayerNames = inputPlayerNames();
-
-        List<Player> players = Arrays.stream(inputtedPlayerNames)
-                .map(name -> new Player(name, inputBattlingMoney(name), deck.startingDraw()))
-                .collect(Collectors.toUnmodifiableList());
-
-        showMessageStartingDraw(players.stream()
-                .map(Player::getNameValue)
-                .collect(Collectors.toUnmodifiableList()));
-
+        List<Player> players = setUpPlayers(inputtedPlayerNames);
+        showMessageStartingDraw(getPlayerNames(players));
         showDealerOneCard(dealer.getOneCardStatus());
+        showAllPlayersCardStatus(players);
 
-        players.forEach(player -> showPlayerCardStatus(player.getNameValue(), player.getCards().toString()));
+        drawAll(players);
+        dealerCanDraw();
+        showAllResultOfBattles(players);
+        showAllResultOfDividends(players);
+    }
 
+    private void drawAll(List<Player> players) {
         players.stream()
                 .filter(player -> inputDrawMoreCard(player.getNameValue()))
                 .forEach(player -> player.draw(deck.draw()));
+    }
 
-        dealerCanDraw();
-        showResultOfDealerCards(dealer.getCards().toString(), dealer.getScore());
-        players.forEach(player -> showCardsResult(player.getNameValue(), player.getCards().toString(), player.getCards().getScore()));
+    private List<Player> setUpPlayers(final String[] inputtedPlayerNames) {
+        return Arrays.stream(inputtedPlayerNames)
+                .map(name -> new Player(name, inputBattlingMoney(name), deck.startingDraw()))
+                .collect(Collectors.toUnmodifiableList());
+    }
 
-        players.forEach(player -> showResultOfDividends(player.getNameValue(), player.battle(dealer.getCards())));
+    private List<String> getPlayerNames(final List<Player> players) {
+        return players.stream()
+                .map(Player::getNameValue)
+                .collect(Collectors.toUnmodifiableList());
+    }
 
-        int dealersDividends = players.stream().mapToInt(player -> player.battle(dealer.getCards())).sum() * -1;
-        showResultOfDealerDividends(dealersDividends);
-
+    private void showAllPlayersCardStatus(final List<Player> players) {
+        players.forEach(player -> showPlayerCardStatus(player.getNameValue(), player.getCards().toString()));
     }
 
     private void dealerCanDraw() {
@@ -51,5 +57,19 @@ public class Controller {
             dealer.draw(deck.draw());
             showMessageDealerWasDrawing();
         }
+    }
+
+    private void showAllResultOfBattles(final List<Player> players) {
+        dealersDividends = players.stream()
+                .mapToInt(player -> player.battle(dealer.getCards())).sum() * -1;
+        showResultOfDealerDividends(dealersDividends);
+        players.forEach(player -> showCardsResult(player.getNameValue(), player.getCards().toString(), player.getCards().getScore()));
+    }
+
+    private void showAllResultOfDividends(final List<Player> players) {
+        players.forEach(player -> showResultOfDividends(player.getNameValue(), player.battle(dealer.getCards())));
+         dealersDividends = players.stream()
+                .mapToInt(player -> player.battle(dealer.getCards())).sum() * -1;
+        showResultOfDealerDividends(dealersDividends);
     }
 }
