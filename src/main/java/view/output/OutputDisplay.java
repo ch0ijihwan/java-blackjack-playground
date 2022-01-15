@@ -37,7 +37,7 @@ public class OutputDisplay {
     }
 
     public static void showResultOfDividends(String name, int dividends) {
-        System.out.println(name+":"+dividends);;
+        System.out.println(name+":"+dividends);
     }
 
     public static void showResultOfDealerDividends(int dividends){
