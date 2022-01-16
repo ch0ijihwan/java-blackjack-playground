@@ -71,11 +71,24 @@ class PlayerTest {
         assertThat(player.getCards()).isEqualTo(new Cards(expectedCards));
     }
 
+    @Test
+    @DisplayName("isStay() 호출 시, 플레이어의 상태가 stay 인 경우 true 를 반환한다.")
+    void isStay() {
+        //given
+        player.stay();
+
+        //when
+        boolean actual = player.isStay();
+
+        //then
+        assertThat(actual).isTrue();
+    }
+
     @ParameterizedTest
     @DisplayName("battle() 호출 시, 파라미터로부터 입력 받은 카드리스트(딜러)와 본인(플레이어)의 카드를 비교한다." +
             "이 비교 결과에 따라 배당금을 반한다.")
     @MethodSource("DealerCardsAndExpectedDividendsProvider")
-    void battle(final Cards dealerCards,final int expectedDividends) {
+    void battle(final Cards dealerCards, final int expectedDividends) {
         //when
         int actualDividends = player.battle(dealerCards);
 
