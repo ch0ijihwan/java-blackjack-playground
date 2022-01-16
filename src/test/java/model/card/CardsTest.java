@@ -48,52 +48,28 @@ class CardsTest {
     }
 
     @ParameterizedTest
-    @DisplayName("hasAce() 호출 시, 카드 중 아직 1로 바꾸지 않은 Ace 가 있다면 true 을 반환한다.")
-    @CsvSource(value = {"ACE:true", "TWO:false"}, delimiter = ':')
-    void hasAce(Number inputtedNumber, boolean expect) {
+    @DisplayName("getScore() 호출 시, 카드의 총 스코어 값을 반환한다." +
+            "이때 총 스코어가 21 보다 큰 경우, 소지한 ACE 카드의 횟수 만큼 ACE의 값(11)을 1로 바꾸어 계산한다.")
+    @CsvSource(value = {"TWO:20", "FOUR:12"}, delimiter = ':')
+    void calculateTotalScore(Number inputtedNumber, int expect) {
         //given
         cards.add(makeCard(Suit.SPADE, inputtedNumber));
-        cards.changeAceScore();
-
-        //when
-        boolean actual = cards.hasAce();
-
-        //then
-        assertThat(actual).isEqualTo(expect);
-    }
-
-    @Test
-    @DisplayName("changeAceScore() 호출 시, 카드 중 Ace 가 있다면 11로 계산 해주던 Ace 를 1로 바꾸어 계산한다." +
-            "즉 전체 score 에서 10을 빼준다.")
-    void changeAceScore() {
-        //given
-        int expectedScore = 8;
-
-        //when
-        cards.changeAceScore();
-
-        //then
-        assertThat(cards.getScore()).isEqualTo(expectedScore);
-    }
-
-    @Test
-    @DisplayName("getScore() 호출 시, 카드의 총 스코어 값을 반환한다.")
-    void calculateTotalScore() {
-        //given
-        int expectedScore = 18;
 
         //when
         int actual = cards.getScore();
 
         //then
-        assertThat(actual).isEqualTo(expectedScore);
+        assertThat(actual).isEqualTo(expect);
     }
 
     @ParameterizedTest
-    @DisplayName("isOver21() 호출 시, 카드의 총 스코어가 21을 초과하면 true 를 반환한다.")
-    @CsvSource(value = {"FOUR:true", "TWO:false"}, delimiter = ':')
+    @DisplayName("isOver21() 호출 시, 카드의 총 스코어가 21을 초과하면, true 를 반환한다.")
+    @CsvSource(value = {"THREE:true", "TWO:false"}, delimiter = ':')
     void isOver21(Number inputtedNumber, boolean expect) {
         //given
+        List<PlayingCard> initialCards
+                = new ArrayList<>(List.of(makeCard(Suit.SPADE, Number.JACK), makeCard(Suit.HEART, Number.NINE)));
+        cards = new Cards(initialCards);
         cards.add(makeCard(Suit.SPADE, inputtedNumber));
 
         //when
