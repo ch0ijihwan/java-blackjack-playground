@@ -44,11 +44,11 @@ public class Controller {
         players.forEach(player -> showPlayerCardStatus(player.getNameValue(), player.getCards().toString()));
     }
 
-    private void drawAllPlayer(List<Player> players) {
+    private void drawAllPlayer(final List<Player> players) {
         players.forEach(this::drawOrStay);
     }
 
-    private void drawOrStay(Player player) {
+    private void drawOrStay(final Player player) {
         while (!player.isStay()) {
             boolean haveToDraw = inputDrawMoreCard(player.getNameValue());
             if (haveToDraw) {
