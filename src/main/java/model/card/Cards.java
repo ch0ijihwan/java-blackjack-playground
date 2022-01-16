@@ -58,6 +58,9 @@ public class Cards {
         return score;
     }
 
+    public boolean canDrawCard() {
+        return getScore() < 21;
+    }
 
     public List<PlayingCard> getCards() {
         return playingCards;
