@@ -14,7 +14,6 @@ import static view.output.OutputDisplay.*;
 public class Controller {
     private final Deck deck = new Deck();
     private final Dealer dealer = new Dealer(deck.startingDraw());
-    private int dealersDividends;
 
     public Controller() {
         showMessageAskNames();
@@ -23,17 +22,10 @@ public class Controller {
         showMessageStartingDraw(getPlayerNames(players));
         showDealerOneCard(dealer.getOneCardStatus());
         showAllPlayersCardStatus(players);
-
-        drawAll(players);
+        drawAllPlayer(players);
         dealerCanDraw();
         showAllResultOfBattles(players);
         showAllResultOfDividends(players);
-    }
-
-    private void drawAll(List<Player> players) {
-        players.stream()
-                .filter(player -> inputDrawMoreCard(player.getNameValue()))
-                .forEach(player -> player.draw(deck.draw()));
     }
 
     private List<Player> setUpPlayers(final String[] inputtedPlayerNames) {
@@ -52,6 +44,22 @@ public class Controller {
         players.forEach(player -> showPlayerCardStatus(player.getNameValue(), player.getCards().toString()));
     }
 
+    private void drawAllPlayer(List<Player> players) {
+        players.forEach(this::drawOrStay);
+    }
+
+    private void drawOrStay(Player player) {
+        while (!player.isStay()) {
+            boolean haveToDraw = inputDrawMoreCard(player.getNameValue());
+            if (haveToDraw) {
+                player.draw(deck.draw());
+                showPlayerCardStatus(player.getNameValue(), player.getCards().toString());
+            } else if (!haveToDraw) {
+                player.stay();
+            }
+        }
+    }
+
     private void dealerCanDraw() {
         if (dealer.isScoreLessThan16()) {
             dealer.draw(deck.draw());
@@ -60,15 +68,13 @@ public class Controller {
     }
 
     private void showAllResultOfBattles(final List<Player> players) {
-        dealersDividends = players.stream()
-                .mapToInt(player -> player.battle(dealer.getCards())).sum() * -1;
-        showResultOfDealerDividends(dealersDividends);
+        showCardsResult("딜러", dealer.getCards().toString(), dealer.getScore());
         players.forEach(player -> showCardsResult(player.getNameValue(), player.getCards().toString(), player.getCards().getScore()));
     }
 
     private void showAllResultOfDividends(final List<Player> players) {
         players.forEach(player -> showResultOfDividends(player.getNameValue(), player.battle(dealer.getCards())));
-         dealersDividends = players.stream()
+        int dealersDividends = players.stream()
                 .mapToInt(player -> player.battle(dealer.getCards())).sum() * -1;
         showResultOfDealerDividends(dealersDividends);
     }
