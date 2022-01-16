@@ -12,6 +12,7 @@ public class Player {
     private final Name name;
     private final Cards cards;
     private final BattingMoney battingMoney;
+    private boolean isStay = false;
 
     public Player(final String name, final int battingMoney, final List<PlayingCard> cards) {
         this.name = new Name(name);
@@ -29,6 +30,17 @@ public class Player {
 
     public void draw(final PlayingCard card) {
         cards.add(card);
+        if (!cards.canDrawCard()) {
+            stay();
+        }
+    }
+
+    public void stay() {
+        isStay = true;
+    }
+
+    public boolean isStay() {
+        return isStay;
     }
 
     public int battle(final Cards dealerCards) {
