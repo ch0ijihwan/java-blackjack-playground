@@ -42,6 +42,6 @@ public class PlayingCard {
 
     @Override
     public String toString() {
-        return suit.toString() + number.getValue();
+        return suit.toString()+"-" + number;
     }
 }
