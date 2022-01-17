@@ -11,7 +11,7 @@ public class PlayingCard {
         this.number = number;
     }
 
-    public static PlayingCard makeCard(final Suit suit, final Number number) {
+    public static PlayingCard of(final Suit suit, final Number number) {
         return new PlayingCard(suit, number);
     }
 
@@ -42,6 +42,6 @@ public class PlayingCard {
 
     @Override
     public String toString() {
-        return suit.toString()+"-" + number;
+        return suit.toString() + "-" + number;
     }
 }

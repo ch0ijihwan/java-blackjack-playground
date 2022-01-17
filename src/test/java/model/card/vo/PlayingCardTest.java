@@ -15,7 +15,7 @@ class PlayingCardTest {
         Number inputtedNumber = Number.ACE;
         Suit inputtedSuit = Suit.HEART;
         Number expectedNumber = Number.ACE;
-        PlayingCard playingCard = PlayingCard.makeCard(inputtedSuit, inputtedNumber);
+        PlayingCard playingCard = PlayingCard.of(inputtedSuit, inputtedNumber);
         //when
         Number actualNumber = playingCard.getNumber();
 
@@ -29,7 +29,7 @@ class PlayingCardTest {
     void isAce(Number inputtedNumber, boolean expected) {
         //given
         Suit inputtedSuit = Suit.HEART;
-        PlayingCard playingCard = PlayingCard.makeCard(inputtedSuit, inputtedNumber);
+        PlayingCard playingCard = PlayingCard.of(inputtedSuit, inputtedNumber);
 
         //when
         boolean actual = playingCard.isAce();
