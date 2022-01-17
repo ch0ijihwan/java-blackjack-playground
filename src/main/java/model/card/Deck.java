@@ -7,7 +7,7 @@ import model.card.vo.Suit;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static model.card.vo.PlayingCard.makeCard;
+import static model.card.vo.PlayingCard.of;
 
 public class Deck {
     private static final int FIRST_INDEX = 0;
@@ -26,7 +26,7 @@ public class Deck {
 
     private List<PlayingCard> createNumberCards(final Suit suit) {
         return Arrays.stream(Number.values())
-                .map(number -> makeCard(suit, number))
+                .map(number -> of(suit, number))
                 .collect(Collectors.toUnmodifiableList());
     }
 
@@ -35,7 +35,7 @@ public class Deck {
     }
 
     public List<PlayingCard> startingDraw() {
-        return List.of(draw(), draw());
+        return new ArrayList<>(Arrays.asList(draw(), draw()));
     }
 
     @Override

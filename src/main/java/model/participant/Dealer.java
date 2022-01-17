@@ -6,29 +6,29 @@ import model.card.vo.PlayingCard;
 import java.util.List;
 import java.util.Objects;
 
-public class Dealer {
-    private final Cards cards;
+public class Dealer extends Participant {
+    private static final int FIRST_CARD_INDEX = 0;
 
     public Dealer(final List<PlayingCard> cards) {
-        this.cards = new Cards(cards);
+        super("딜러", cards);
     }
 
-    public boolean  isScoreLessThan16() {
-        return cards.getScore() <= 16;
-    }
-
-    public void draw(final PlayingCard card) {
-        cards.add(card);
-    }
-    public String getOneCardStatus(){
-        return cards.getCards().get(0).toString();
-    }
-    public Cards getCards() {
-        return cards;
+    public String getOneCardStatus() {
+        return cards.getCards().get(FIRST_CARD_INDEX).toString();
     }
 
     public int getScore() {
         return cards.getScore();
+    }
+
+    @Override
+    public boolean canDrawCard() {
+        return cards.getScore() <= 16;
+    }
+
+    @Override
+    public Cards getCards() {
+        return cards;
     }
 
     @Override

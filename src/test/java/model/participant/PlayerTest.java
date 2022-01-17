@@ -11,11 +11,12 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static model.card.vo.PlayingCard.makeCard;
+import static model.card.vo.PlayingCard.of;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class PlayerTest {
@@ -25,7 +26,8 @@ class PlayerTest {
     void setUp() {
         String inputtedName = "apple";
         int inputtedBattingMoney = 10000;
-        List<PlayingCard> inputtedCards = List.of(makeCard(Suit.SPADE, Number.ACE), makeCard(Suit.HEART, Number.SEVEN));
+        List<PlayingCard> inputtedCards = new ArrayList<>(
+                Arrays.asList(of(Suit.SPADE, Number.ACE), of(Suit.HEART, Number.SEVEN)));
         player = new Player(inputtedName, inputtedBattingMoney, inputtedCards);
     }
 
@@ -35,7 +37,7 @@ class PlayerTest {
         //when
         String inputtedName = "apple";
         int inputtedBattingMoney = 10000;
-        List<PlayingCard> inputtedCards = List.of(makeCard(Suit.SPADE, Number.ACE), makeCard(Suit.HEART, Number.SEVEN));
+        List<PlayingCard> inputtedCards = List.of(of(Suit.SPADE, Number.ACE), of(Suit.HEART, Number.SEVEN));
 
         //then
         assertThat(player).isEqualTo(new Player(inputtedName, inputtedBattingMoney, inputtedCards));
@@ -46,7 +48,7 @@ class PlayerTest {
     @DisplayName("getCards() 실행 시, cards 를 반환한다.")
     void getCards() {
         //given
-        List<PlayingCard> inputtedCards = List.of(makeCard(Suit.SPADE, Number.ACE), makeCard(Suit.HEART, Number.SEVEN));
+        List<PlayingCard> inputtedCards = List.of(of(Suit.SPADE, Number.ACE), of(Suit.HEART, Number.SEVEN));
         //when
         Cards actual = player.getCards();
 
@@ -59,13 +61,13 @@ class PlayerTest {
     void draw() {
         //given
         List<PlayingCard> expectedCards = Arrays.asList(
-                makeCard(Suit.SPADE, Number.ACE),
-                makeCard(Suit.HEART, Number.SEVEN),
-                makeCard(Suit.CLUB, Number.SEVEN)
+                of(Suit.SPADE, Number.ACE),
+                of(Suit.HEART, Number.SEVEN),
+                of(Suit.CLUB, Number.SEVEN)
         );
 
         //when
-        player.draw(makeCard(Suit.CLUB, Number.SEVEN));
+        player.draw(of(Suit.CLUB, Number.SEVEN));
 
         //then
         assertThat(player.getCards()).isEqualTo(new Cards(expectedCards));
@@ -75,9 +77,9 @@ class PlayerTest {
     @DisplayName("battle() 호출 시, 파라미터로부터 입력 받은 카드리스트(딜러)와 본인(플레이어)의 카드를 비교한다." +
             "이 비교 결과에 따라 배당금을 반한다.")
     @MethodSource("DealerCardsAndExpectedDividendsProvider")
-    void battle(final Cards dealerCards,final int expectedDividends) {
+    void battle(final Cards dealerCards, final int expectedDividends) {
         //when
-        int actualDividends = player.battle(dealerCards);
+        int actualDividends = player.getDividends(dealerCards);
 
         //then
         assertThat(actualDividends).isEqualTo(expectedDividends);
@@ -85,8 +87,8 @@ class PlayerTest {
 
     private static Stream<Arguments> DealerCardsAndExpectedDividendsProvider() {
         return Stream.of(
-                Arguments.of(new Cards(List.of(makeCard(Suit.HEART, Number.SIX), makeCard(Suit.SPADE, Number.KING))), 10000),
-                Arguments.of(new Cards(List.of(makeCard(Suit.HEART, Number.NINE), makeCard(Suit.SPADE, Number.KING))), -10000)
+                Arguments.of(new Cards(List.of(of(Suit.HEART, Number.SIX), of(Suit.SPADE, Number.KING))), 10000),
+                Arguments.of(new Cards(List.of(of(Suit.HEART, Number.NINE), of(Suit.SPADE, Number.KING))), -10000)
         );
     }
 }

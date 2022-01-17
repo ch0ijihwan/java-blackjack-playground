@@ -14,7 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static model.card.vo.PlayingCard.makeCard;
+import static model.card.vo.PlayingCard.of;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class CardsTest {
@@ -23,7 +23,7 @@ class CardsTest {
     @BeforeEach
     void setUp() {
         List<PlayingCard> initialCards
-                = new ArrayList<>(List.of(makeCard(Suit.SPADE, Number.ACE), makeCard(Suit.HEART, Number.SEVEN)));
+                = new ArrayList<>(List.of(of(Suit.SPADE, Number.ACE), of(Suit.HEART, Number.SEVEN)));
         cards = new Cards(initialCards);
     }
 
@@ -35,66 +35,27 @@ class CardsTest {
         Number inputtedNumber = Number.TWO;
 
         List<PlayingCard> expectedCards = List.of(
-                makeCard(Suit.SPADE, Number.ACE),
-                makeCard(Suit.HEART, Number.SEVEN)
-                , makeCard(inputtedSuit, inputtedNumber)
+                of(Suit.SPADE, Number.ACE),
+                of(Suit.HEART, Number.SEVEN)
+                , of(inputtedSuit, inputtedNumber)
         );
 
         //when
-        cards.add(makeCard(inputtedSuit, inputtedNumber));
+        cards.add(of(inputtedSuit, inputtedNumber));
 
         //then
         assertThat(cards).isEqualTo(new Cards(expectedCards));
     }
 
     @ParameterizedTest
-    @DisplayName("hasAce() 호출 시, 카드 중 아직 1로 바꾸지 않은 Ace 가 있다면 true 을 반환한다.")
-    @CsvSource(value = {"ACE:true", "TWO:false"}, delimiter = ':')
-    void hasAce(Number inputtedNumber, boolean expect) {
-        //given
-        cards.add(makeCard(Suit.SPADE, inputtedNumber));
-        cards.changeAceScore();
-
-        //when
-        boolean actual = cards.hasAce();
-
-        //then
-        assertThat(actual).isEqualTo(expect);
-    }
-
-    @Test
-    @DisplayName("changeAceScore() 호출 시, 카드 중 Ace 가 있다면 11로 계산 해주던 Ace 를 1로 바꾸어 계산한다." +
-            "즉 전체 score 에서 10을 빼준다.")
-    void changeAceScore() {
-        //given
-        int expectedScore = 8;
-
-        //when
-        cards.changeAceScore();
-
-        //then
-        assertThat(cards.getScore()).isEqualTo(expectedScore);
-    }
-
-    @Test
-    @DisplayName("getScore() 호출 시, 카드의 총 스코어 값을 반환한다.")
-    void calculateTotalScore() {
-        //given
-        int expectedScore = 18;
-
-        //when
-        int actual = cards.getScore();
-
-        //then
-        assertThat(actual).isEqualTo(expectedScore);
-    }
-
-    @ParameterizedTest
-    @DisplayName("isOver21() 호출 시, 카드의 총 스코어가 21을 초과하면 true 를 반환한다.")
-    @CsvSource(value = {"FOUR:true", "TWO:false"}, delimiter = ':')
+    @DisplayName("isBurst() 호출 시, 카드의 총 스코어가 21을 초과하면, true 를 반환한다.")
+    @CsvSource(value = {"THREE:true", "TWO:false"}, delimiter = ':')
     void isOver21(Number inputtedNumber, boolean expect) {
         //given
-        cards.add(makeCard(Suit.SPADE, inputtedNumber));
+        List<PlayingCard> initialCards
+                = new ArrayList<>(List.of(of(Suit.SPADE, Number.JACK), of(Suit.HEART, Number.NINE)));
+        cards = new Cards(initialCards);
+        cards.add(of(Suit.SPADE, inputtedNumber));
 
         //when
         boolean actual = cards.isBurst();
@@ -113,7 +74,7 @@ class CardsTest {
                 .collect(Collectors.toUnmodifiableList());
 
         List<PlayingCard> initialCards = numbers.stream()
-                .map(number -> makeCard(Suit.SPADE, number))
+                .map(number -> of(Suit.SPADE, number))
                 .collect(Collectors.toUnmodifiableList());
 
         Cards cards = new Cards(initialCards);
@@ -129,7 +90,7 @@ class CardsTest {
     @DisplayName("getCards() 호출 시, 카드들을 반환한다..")
     void getCards() {
         //given
-        List<PlayingCard> expectedCards = List.of(makeCard(Suit.SPADE, Number.ACE), makeCard(Suit.HEART, Number.SEVEN));
+        List<PlayingCard> expectedCards = List.of(of(Suit.SPADE, Number.ACE), of(Suit.HEART, Number.SEVEN));
         //when
         List<PlayingCard> actual = cards.getCards();
 
