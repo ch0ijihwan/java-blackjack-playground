@@ -3,47 +3,24 @@ package model.participant;
 import model.card.Cards;
 import model.card.vo.PlayingCard;
 import model.participant.vo.BattingMoney;
-import model.participant.vo.Name;
 
 import java.util.List;
 import java.util.Objects;
 
-public class Player {
-    private final Name name;
-    private final Cards cards;
+public class Player extends Participant {
     private final BattingMoney battingMoney;
-    private boolean isStay = false;
 
-    public Player(final String name, final int battingMoney, final List<PlayingCard> cards) {
-        this.name = new Name(name);
-        this.battingMoney = new BattingMoney(battingMoney);
-        this.cards = new Cards(cards);
+    public Player(final String inputtedName, final int inputtedBattingMoney, final List<PlayingCard> initCards) {
+        super(inputtedName, initCards);
+        battingMoney = new BattingMoney(inputtedBattingMoney);
     }
 
-    public Cards getCards() {
-        return this.cards;
+    @Override
+    public boolean canDrawCard() {
+        return cards.canDrawCard();
     }
 
-    public String getNameValue() {
-        return name.getValue();
-    }
-
-    public void draw(final PlayingCard card) {
-        cards.add(card);
-        if (!cards.canDrawCard()) {
-            stay();
-        }
-    }
-
-    public void stay() {
-        isStay = true;
-    }
-
-    public boolean isStay() {
-        return isStay;
-    }
-
-    public int battle(final Cards dealerCards) {
+    public int getDividends(final Cards dealerCards) {
         if (this.cards.isBurst() || dealerCards.getScore() > cards.getScore()) {
             return battingMoney.getValue() * -1;
         } else if (this.cards.isBlackJack()) {
