@@ -13,6 +13,6 @@ public class APP {
         Scanner scanner = new Scanner(System.in);
         InputView inputView = new ConsoleInput(scanner);
         OutputView outputView = new ConsoleOutput();
-        new Controller(inputView,outputView);
+        new Controller(inputView,outputView).run();
     }
 }
