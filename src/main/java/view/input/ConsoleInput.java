@@ -22,18 +22,9 @@ public class ConsoleInput implements InputView {
     }
 
     @Override
-    public boolean inputDrawMoreCard(final String name) {
+    public DrawingCardAnswer inputDrawMoreCard(final String name) {
         System.out.println(name + "는 한장의 카드를 더 받겠습니까?(예는 y, 아니오는 n)");
 
-        return askYesOrNo(scanner.next());
-    }
-
-    private boolean askYesOrNo(final String value) {
-        if (value.equals("y")) {
-            return true;
-        } else if (value.equals("n")) {
-            return false;
-        }
-        throw new IllegalArgumentException("y 혹은 n을 입력해야 합니다.");
+        return DrawingCardAnswer.of(scanner.next());
     }
 }

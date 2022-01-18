@@ -3,6 +3,7 @@ package controller;
 import model.card.Deck;
 import model.participant.Dealer;
 import model.participant.Player;
+import view.input.DrawingCardAnswer;
 import view.input.InputView;
 import view.output.OutputView;
 
@@ -59,7 +60,7 @@ public class Controller {
     }
 
     private void drawOrStay(final Player player) {
-        while (player.canDrawCard() && inputView.inputDrawMoreCard(player.getNameValue())) {
+        while (player.canDrawCard() && inputView.inputDrawMoreCard(player.getNameValue()).equals(DrawingCardAnswer.YES)) {
             player.draw(deck.provideCard());
             outputView.showPlayerCardStatus(player.getNameValue(), player.getCards().toString());
         }
