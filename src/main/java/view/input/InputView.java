@@ -5,5 +5,5 @@ public interface InputView {
 
     int inputBattlingMoney(final String name);
 
-    boolean inputDrawMoreCard(final String name);
+    DrawingCardAnswer inputDrawMoreCard(final String name);
 }

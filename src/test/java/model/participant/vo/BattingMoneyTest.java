@@ -26,8 +26,7 @@ class BattingMoneyTest {
         int inputtedNumber = -1;
 
         //then
-        assertThatThrownBy(() -> new BattingMoney(inputtedNumber))
-                .isInstanceOf(IllegalArgumentException.class)
+        assertThatThrownBy(() -> new BattingMoney(inputtedNumber)).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("배팅 금액은 양수여야 합니다.");
     }
 
