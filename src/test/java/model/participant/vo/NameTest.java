@@ -14,8 +14,7 @@ class NameTest {
         String inputtedName = "";
 
         //then
-        assertThatThrownBy(() -> new Name(inputtedName))
-                .isInstanceOf(IllegalArgumentException.class)
+        assertThatThrownBy(() -> new Name(inputtedName)).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("이름은 공백이 될 수 없습니다.");
     }
 
