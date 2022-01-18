@@ -60,14 +60,14 @@ public class Controller {
 
     private void drawOrStay(final Player player) {
         while (player.canDrawCard() && inputView.inputDrawMoreCard(player.getNameValue())) {
-            player.draw(deck.draw());
+            player.draw(deck.provideCard());
             outputView.showPlayerCardStatus(player.getNameValue(), player.getCards().toString());
         }
     }
 
     private void drawOneCardDealer() {
         if (dealer.canDrawCard()) {
-            dealer.draw(deck.draw());
+            dealer.draw(deck.provideCard());
             outputView.showMessageDealerWasDrawing();
         }
     }
