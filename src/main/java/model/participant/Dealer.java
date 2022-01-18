@@ -45,8 +45,7 @@ public class Dealer extends Participant {
     }
 
     @Override
-    public String
-    toString() {
+    public String toString() {
         return "Dealer{" +
                 "cards=" + cards +
                 '}';
