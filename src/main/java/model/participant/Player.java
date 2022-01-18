@@ -25,6 +25,8 @@ public class Player extends Participant {
             return battingMoney.getValue() * -1;
         } else if (this.cards.isBlackJack()) {
             return (int) (battingMoney.getValue() * 1.5);
+        } else if (dealerCards.isBurst()) {
+            return battingMoney.getValue();
         }
         return battingMoney.getValue();
     }
