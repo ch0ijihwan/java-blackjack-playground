@@ -30,12 +30,15 @@ public class Deck {
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    public PlayingCard draw() {
+    public PlayingCard provideCard() {
+        if (cards.isEmpty()) {
+            throw new IllegalStateException("덱에 카드가 없는 상태입니다. 카드를 뽑을 수 없습니다.");
+        }
         return cards.remove(FIRST_INDEX);
     }
 
     public List<PlayingCard> startingDraw() {
-        return new ArrayList<>(Arrays.asList(draw(), draw()));
+        return new ArrayList<>(Arrays.asList(provideCard(), provideCard()));
     }
 
     @Override
