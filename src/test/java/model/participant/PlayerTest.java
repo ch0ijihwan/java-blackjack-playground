@@ -76,7 +76,7 @@ class PlayerTest {
     @ParameterizedTest
     @DisplayName("battle() 호출 시, 파라미터로부터 입력 받은 카드리스트(딜러)와 본인(플레이어)의 카드를 비교한다." +
             "이 비교 결과에 따라 배당금을 반한다.")
-    @MethodSource("DealerCardsAndExpectedDividendsProvider")
+    @MethodSource("dealerCardsAndExpectedDividendsProvider")
     void battle(final Cards dealerCards, final int expectedDividends) {
         //when
         int actualDividends = player.getDividends(dealerCards);
@@ -85,7 +85,7 @@ class PlayerTest {
         assertThat(actualDividends).isEqualTo(expectedDividends);
     }
 
-    private static Stream<Arguments> DealerCardsAndExpectedDividendsProvider() {
+    private static Stream<Arguments> dealerCardsAndExpectedDividendsProvider() {
         return Stream.of(
                 Arguments.of(new Cards(List.of(of(Suit.HEART, Number.SIX), of(Suit.SPADE, Number.KING))), 10000),
                 Arguments.of(new Cards(List.of(of(Suit.HEART, Number.NINE), of(Suit.SPADE, Number.KING))), -10000)
