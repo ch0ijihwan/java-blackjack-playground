@@ -2,23 +2,21 @@ package model.participant;
 
 import model.card.Cards;
 import model.card.vo.PlayingCard;
+import model.participant.state.State;
 import model.participant.vo.Name;
 
-import java.util.List;
-
 public abstract class Participant {
-    final Name name;
-    final Cards cards;
+    State state;
+    Name name;
 
-    Participant(final String name, final List<PlayingCard> cards) {
+    Participant(final String name) {
         this.name = new Name(name);
-        this.cards = new Cards(cards);
     }
 
     public abstract boolean canDrawCard();
 
     public Cards getCards() {
-        return this.cards;
+        return state.getCards();
     }
 
     public String getNameValue() {
@@ -26,6 +24,6 @@ public abstract class Participant {
     }
 
     public void draw(final PlayingCard card) {
-        cards.add(card);
+        state.draw(card);
     }
 }

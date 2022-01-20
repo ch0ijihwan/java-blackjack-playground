@@ -1,34 +1,37 @@
 package model.participant;
 
 import model.card.Cards;
-import model.card.vo.PlayingCard;
+import model.participant.state.finished.Blackjack;
+import model.participant.state.running.Hit;
 import model.participant.vo.BattingMoney;
 
-import java.util.List;
 import java.util.Objects;
 
 public class Player extends Participant {
     private final BattingMoney battingMoney;
+    private Cards cards;
 
-    public Player(final String inputtedName, final int inputtedBattingMoney, final List<PlayingCard> initCards) {
-        super(inputtedName, initCards);
+    public Player(final String inputtedName, final int inputtedBattingMoney, final Cards initCards) {
+        super(inputtedName);
+        if (initCards.isBlackJack()) {
+            state = new Blackjack(initCards);
+        } else if (initCards.canDrawCard()) {
+            state = new Hit(initCards);
+        }
         battingMoney = new BattingMoney(inputtedBattingMoney);
+    }
+
+    public void stay() {
+        state = state.stay();
     }
 
     @Override
     public boolean canDrawCard() {
-        return cards.canDrawCard();
+        return state.getCards().canDrawCard();
     }
 
     public int getDividends(final Cards dealerCards) {
-        if (this.cards.isBurst() || dealerCards.getScore() > cards.getScore()) {
-            return battingMoney.getValue() * -1;
-        } else if (this.cards.isBlackJack()) {
-            return (int) (battingMoney.getValue() * 1.5);
-        } else if (dealerCards.isBurst()) {
-            return battingMoney.getValue();
-        }
-        return battingMoney.getValue();
+        return state.getProfit(this.battingMoney, dealerCards);
     }
 
     @Override

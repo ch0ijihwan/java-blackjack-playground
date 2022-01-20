@@ -37,8 +37,8 @@ public class Deck {
         return cards.remove(FIRST_INDEX);
     }
 
-    public List<PlayingCard> startingDraw() {
-        return new ArrayList<>(Arrays.asList(provideCard(), provideCard()));
+    public Cards startingDraw() {
+        return new Cards(new ArrayList<>(Arrays.asList(provideCard(), provideCard())));
     }
 
     @Override
