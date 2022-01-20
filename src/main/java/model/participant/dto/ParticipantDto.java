@@ -1,19 +1,14 @@
 package model.participant.dto;
 
-import model.participant.Dealer;
-import model.participant.Player;
+import model.participant.Participant;
 
 public class ParticipantDto {
     private final int score;
     private final String name;
     private final String cardsStatus;
 
-    public static ParticipantDto from(Player player) {
-        return new ParticipantDto(player.getNameValue(), player.getCards().toString(), player.getCards().getScore());
-    }
-
-    public static ParticipantDto from(Dealer dealer) {
-        return new ParticipantDto(dealer.getNameValue(), dealer.getCards().toString(), dealer.getCards().getScore());
+    public static ParticipantDto from(Participant participant) {
+        return new ParticipantDto(participant.getNameValue(), participant.getCards().toString(), participant.getCards().getScore());
     }
 
     private ParticipantDto(String name, String cardsStatus, int score) {
