@@ -4,7 +4,6 @@ import model.card.vo.PlayingCard;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
 import java.util.stream.IntStream;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -13,6 +12,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 class DeckTest {
     private static final int FIRST_INDEX_OF_DECK = 0;
     private static final int LAST_INDEX_OF_DECK = 52;
+
     @Test
     @DisplayName("객체 생성 시, 카드를 52장 생성한다.")
     void createDeck() {
@@ -69,9 +69,9 @@ class DeckTest {
         int expectedNumberOfCards = 2;
 
         //when
-        List<PlayingCard> actualStartingCards = deck.startingDraw();
+        Cards actualStartingCards = deck.startingDraw();
 
         //then
-        assertThat(actualStartingCards.size()).isEqualTo(expectedNumberOfCards);
+        assertThat(actualStartingCards.getCards().size()).isEqualTo(expectedNumberOfCards);
     }
 }

@@ -26,8 +26,8 @@ class PlayerTest {
     void setUp() {
         String inputtedName = "apple";
         int inputtedBattingMoney = 10000;
-        List<PlayingCard> inputtedCards = new ArrayList<>(
-                Arrays.asList(of(Suit.SPADE, Number.ACE), of(Suit.HEART, Number.SEVEN)));
+        Cards inputtedCards = new Cards(new ArrayList<>(
+                Arrays.asList(of(Suit.SPADE, Number.ACE), of(Suit.HEART, Number.SEVEN))));
         player = new Player(inputtedName, inputtedBattingMoney, inputtedCards);
     }
 
@@ -37,7 +37,7 @@ class PlayerTest {
         //when
         String inputtedName = "apple";
         int inputtedBattingMoney = 10000;
-        List<PlayingCard> inputtedCards = List.of(of(Suit.SPADE, Number.ACE), of(Suit.HEART, Number.SEVEN));
+        Cards inputtedCards = new Cards(List.of(of(Suit.SPADE, Number.ACE), of(Suit.HEART, Number.SEVEN)));
 
         //then
         assertThat(player).isEqualTo(new Player(inputtedName, inputtedBattingMoney, inputtedCards));
@@ -74,10 +74,13 @@ class PlayerTest {
     }
 
     @ParameterizedTest
-    @DisplayName("battle() 호출 시, 파라미터로부터 입력 받은 카드리스트(딜러)와 본인(플레이어)의 카드를 비교한다." +
+    @DisplayName("getProfit() 호출 시, 파라미터로부터 입력 받은 카드리스트(딜러)와 본인(플레이어)의 카드를 비교한다." +
             "이 비교 결과에 따라 배당금을 반한다.")
     @MethodSource("dealerCardsAndExpectedDividendsProvider")
-    void battle(final Cards dealerCards, final int expectedDividends) {
+    void getProfit(final Cards dealerCards, final int expectedDividends) {
+        //given
+        player.stay();
+
         //when
         int actualDividends = player.getDividends(dealerCards);
 
