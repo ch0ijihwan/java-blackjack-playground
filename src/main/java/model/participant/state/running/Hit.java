@@ -6,15 +6,15 @@ import model.participant.state.State;
 import model.participant.state.finished.Bust;
 import model.participant.state.finished.Stay;
 
-public class Hit extends Running{
-    protected Hit(Cards initCards) {
+public class Hit extends Running {
+    public Hit(Cards initCards) {
         super(initCards);
     }
 
     @Override
     public State draw(PlayingCard card) {
         cards.add(card);
-        if(cards.isBurst()){
+        if (cards.isBurst()) {
             return new Bust(cards);
         }
         return new Hit(cards);

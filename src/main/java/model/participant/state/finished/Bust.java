@@ -1,7 +1,6 @@
 package model.participant.state.finished;
 
 import model.card.Cards;
-import model.participant.state.State;
 import model.participant.vo.BattingMoney;
 
 public class Bust extends Finished {
@@ -16,8 +15,8 @@ public class Bust extends Finished {
 
     @Override
     public int getProfit(BattingMoney battingMoney, Cards dealerCards) {
-        if(dealerCards.isBurst()){
-             return 0;
+        if (dealerCards.isBurst()) {
+            return 0;
         }
         return battingMoney.getValue() * -1;
     }

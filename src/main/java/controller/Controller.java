@@ -3,6 +3,7 @@ package controller;
 import model.card.Deck;
 import model.participant.Dealer;
 import model.participant.Player;
+import model.participant.state.State;
 import view.input.DrawingCardAnswer;
 import view.input.InputView;
 import view.output.OutputView;
@@ -16,6 +17,7 @@ public class Controller {
     private final Dealer dealer = new Dealer(deck.startingDraw());
     private final InputView inputView;
     private final OutputView outputView;
+    private State state;
     private List<Player> players;
 
     public Controller(InputView inputView, OutputView outputView) {
@@ -79,6 +81,7 @@ public class Controller {
     }
 
     private void showAllResultOfDividends(final List<Player> players) {
+        players.forEach(Player::stay);
         players.forEach(player -> outputView.showResultOfDividends(player.getNameValue(), player.getDividends(dealer.getCards())));
         int dealersDividends = players.stream()
                 .mapToInt(player -> player.getDividends(dealer.getCards())).sum() * -1;

@@ -1,53 +1,48 @@
 package model.participant;
 
 import model.card.Cards;
-import model.card.vo.PlayingCard;
-
-import java.util.List;
-import java.util.Objects;
+import model.participant.state.running.Hit;
 
 public class Dealer extends Participant {
     private static final int FIRST_CARD_INDEX = 0;
 
-    public Dealer(final List<PlayingCard> cards) {
-        super("딜러", cards);
+    public Dealer(final Cards initCards) {
+        super("딜러");
+        state = new Hit(initCards);
     }
 
     public String getOneCardStatus() {
-        return cards.getCards().get(FIRST_CARD_INDEX).toString();
+        return state.getCards()
+                .getCards()
+                .get(FIRST_CARD_INDEX).toString();
     }
 
     public int getScore() {
-        return cards.getScore();
+        return state.getCards().getScore();
     }
 
     @Override
     public boolean canDrawCard() {
-        return cards.getScore() <= 16;
+        return state.getCards().getScore() <= 16;
     }
 
     @Override
     public Cards getCards() {
-        return cards;
+        return state.getCards();
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Dealer dealer = (Dealer) o;
-        return Objects.equals(cards, dealer.cards);
+    public boolean equals(Object obj) {
+        return super.equals(obj);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(cards);
+        return super.hashCode();
     }
 
     @Override
     public String toString() {
-        return "Dealer{" +
-                "cards=" + cards +
-                '}';
+        return super.toString();
     }
 }
