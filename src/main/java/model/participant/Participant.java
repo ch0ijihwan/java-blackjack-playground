@@ -24,6 +24,6 @@ public abstract class Participant {
     }
 
     public void draw(final Card card) {
-        state.draw(card);
+        state = state.draw(card);
     }
 }
