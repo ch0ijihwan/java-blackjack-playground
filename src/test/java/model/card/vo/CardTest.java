@@ -16,6 +16,7 @@ class CardTest {
         Suit inputtedSuit = Suit.HEART;
         Number expectedNumber = Number.ACE;
         Card card = Card.of(inputtedSuit, inputtedNumber);
+
         //when
         Number actualNumber = card.getNumber();
 
