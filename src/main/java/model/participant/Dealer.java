@@ -13,7 +13,7 @@ public class Dealer extends Participant {
 
     public String getOneCardStatus() {
         return state.getCards()
-                .getCards()
+                .getPlayingCards()
                 .get(FIRST_CARD_INDEX).toString();
     }
 

@@ -1,7 +1,7 @@
 package model.card;
 
 import model.card.vo.Number;
-import model.card.vo.PlayingCard;
+import model.card.vo.Card;
 import model.card.vo.Suit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -14,7 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static model.card.vo.PlayingCard.of;
+import static model.card.vo.Card.of;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class CardsTest {
@@ -22,7 +22,7 @@ class CardsTest {
 
     @BeforeEach
     void setUp() {
-        List<PlayingCard> initialCards
+        List<Card> initialCards
                 = new ArrayList<>(List.of(of(Suit.SPADE, Number.ACE), of(Suit.HEART, Number.SEVEN)));
         cards = new Cards(initialCards);
     }
@@ -34,7 +34,7 @@ class CardsTest {
         Suit inputtedSuit = Suit.SPADE;
         Number inputtedNumber = Number.TWO;
 
-        List<PlayingCard> expectedCards = List.of(
+        List<Card> expectedCards = List.of(
                 of(Suit.SPADE, Number.ACE),
                 of(Suit.HEART, Number.SEVEN)
                 , of(inputtedSuit, inputtedNumber)
@@ -52,7 +52,7 @@ class CardsTest {
     @CsvSource(value = {"THREE:true", "TWO:false"}, delimiter = ':')
     void isOver21(Number inputtedNumber, boolean expect) {
         //given
-        List<PlayingCard> initialCards
+        List<Card> initialCards
                 = new ArrayList<>(List.of(of(Suit.SPADE, Number.JACK), of(Suit.HEART, Number.NINE)));
         cards = new Cards(initialCards);
         cards.add(of(Suit.SPADE, inputtedNumber));
@@ -73,7 +73,7 @@ class CardsTest {
                 .map(Number::valueOf)
                 .collect(Collectors.toUnmodifiableList());
 
-        List<PlayingCard> initialCards = numbers.stream()
+        List<Card> initialCards = numbers.stream()
                 .map(number -> of(Suit.SPADE, number))
                 .collect(Collectors.toUnmodifiableList());
 
@@ -90,9 +90,9 @@ class CardsTest {
     @DisplayName("getCards() 호출 시, 카드들을 반환한다..")
     void getCards() {
         //given
-        List<PlayingCard> expectedCards = List.of(of(Suit.SPADE, Number.ACE), of(Suit.HEART, Number.SEVEN));
+        List<Card> expectedCards = List.of(of(Suit.SPADE, Number.ACE), of(Suit.HEART, Number.SEVEN));
         //when
-        List<PlayingCard> actual = cards.getCards();
+        List<Card> actual = cards.getPlayingCards();
 
         //then
         assertThat(actual).isEqualTo(expectedCards);

@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-class PlayingCardTest {
+class CardTest {
     @Test
     @DisplayName("getNumber() 호출 시, 카드 객체의 Number 값을 반환한다.")
     void getNumber() {
@@ -15,9 +15,9 @@ class PlayingCardTest {
         Number inputtedNumber = Number.ACE;
         Suit inputtedSuit = Suit.HEART;
         Number expectedNumber = Number.ACE;
-        PlayingCard playingCard = PlayingCard.of(inputtedSuit, inputtedNumber);
+        Card card = Card.of(inputtedSuit, inputtedNumber);
         //when
-        Number actualNumber = playingCard.getNumber();
+        Number actualNumber = card.getNumber();
 
         //then
         assertThat(actualNumber).isEqualTo(expectedNumber);
@@ -29,10 +29,10 @@ class PlayingCardTest {
     void isAce(Number inputtedNumber, boolean expected) {
         //given
         Suit inputtedSuit = Suit.HEART;
-        PlayingCard playingCard = PlayingCard.of(inputtedSuit, inputtedNumber);
+        Card card = Card.of(inputtedSuit, inputtedNumber);
 
         //when
-        boolean actual = playingCard.isAce();
+        boolean actual = card.isAce();
 
         //then
         assertThat(actual).isEqualTo(expected);

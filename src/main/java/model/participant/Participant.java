@@ -1,7 +1,7 @@
 package model.participant;
 
 import model.card.Cards;
-import model.card.vo.PlayingCard;
+import model.card.vo.Card;
 import model.participant.state.State;
 import model.participant.vo.Name;
 
@@ -23,7 +23,7 @@ public abstract class Participant {
         return name.getValue();
     }
 
-    public void draw(final PlayingCard card) {
+    public void draw(final Card card) {
         state.draw(card);
     }
 }

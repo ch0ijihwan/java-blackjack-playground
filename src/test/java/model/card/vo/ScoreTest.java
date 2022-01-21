@@ -16,7 +16,7 @@ class ScoreTest {
     @DisplayName("getValue() 호출 시, 카드 리스트를 받아 카드 의 총 스코어를 반환한다." +
             "이때 카드의 총 스코어가 21이하인 경우 가능한 한 ACE 를 11로 간주하고 계산한다.")
     @MethodSource("providerCardsAndExpectedScore")
-    void getValue(final List<PlayingCard> cards, final int expect) {
+    void getValue(final List<Card> cards, final int expect) {
         //given
         Score score = Score.of(cards);
 
@@ -30,19 +30,19 @@ class ScoreTest {
     private static Stream<Arguments> providerCardsAndExpectedScore() {
         return Stream.of(
                 Arguments.of(Arrays.asList(
-                        PlayingCard.of(Suit.HEART, Number.THREE), PlayingCard.of(Suit.SPADE, Number.FOUR)), 7),
+                        Card.of(Suit.HEART, Number.THREE), Card.of(Suit.SPADE, Number.FOUR)), 7),
                 Arguments.of(Arrays.asList(
-                        PlayingCard.of(Suit.HEART, Number.ACE), PlayingCard.of(Suit.SPADE, Number.JACK)), 21),
+                        Card.of(Suit.HEART, Number.ACE), Card.of(Suit.SPADE, Number.JACK)), 21),
                 Arguments.of(Arrays.asList(
-                        PlayingCard.of(Suit.HEART, Number.ACE), PlayingCard.of(Suit.SPADE, Number.ACE), PlayingCard.of(Suit.SPADE, Number.ACE)), 13),
+                        Card.of(Suit.HEART, Number.ACE), Card.of(Suit.SPADE, Number.ACE), Card.of(Suit.SPADE, Number.ACE)), 13),
                 Arguments.of(Arrays.asList(
-                        PlayingCard.of(Suit.HEART, Number.ACE), PlayingCard.of(Suit.SPADE, Number.JACK), PlayingCard.of(Suit.HEART, Number.FOUR)), 15));
+                        Card.of(Suit.HEART, Number.ACE), Card.of(Suit.SPADE, Number.JACK), Card.of(Suit.HEART, Number.FOUR)), 15));
     }
 
     @ParameterizedTest
     @DisplayName("isLessThan21() 호출 시, 스코어가 21 미만이면 true 를 반환한다.")
     @MethodSource("providerLessThen21CardsAndExpect")
-    void isLessThen21(final List<PlayingCard> cards, final boolean expect) {
+    void isLessThen21(final List<Card> cards, final boolean expect) {
         //given
         Score score = Score.of(cards);
 
@@ -56,15 +56,15 @@ class ScoreTest {
     private static Stream<Arguments> providerLessThen21CardsAndExpect() {
         return Stream.of(
                 Arguments.of(Arrays.asList(
-                        PlayingCard.of(Suit.HEART, Number.ACE), PlayingCard.of(Suit.SPADE, Number.NINE)), true),
+                        Card.of(Suit.HEART, Number.ACE), Card.of(Suit.SPADE, Number.NINE)), true),
                 Arguments.of(Arrays.asList(
-                        PlayingCard.of(Suit.HEART, Number.ACE), PlayingCard.of(Suit.SPADE, Number.JACK)), false));
+                        Card.of(Suit.HEART, Number.ACE), Card.of(Suit.SPADE, Number.JACK)), false));
     }
 
     @ParameterizedTest
     @DisplayName("isBiggerThan21() 호출 시, 스코어가 21를 초과하면 true 를 반환한다.")
     @MethodSource("providerBiggerThen21CardsAndExpect")
-    void isBiggerThan21(final List<PlayingCard> cards, final boolean expect) {
+    void isBiggerThan21(final List<Card> cards, final boolean expect) {
         //given
         Score score = Score.of(cards);
 
@@ -78,17 +78,17 @@ class ScoreTest {
     private static Stream<Arguments> providerBiggerThen21CardsAndExpect() {
         return Stream.of(
                 Arguments.of(Arrays.asList(
-                        PlayingCard.of(Suit.HEART, Number.JACK), PlayingCard.of(Suit.SPADE, Number.JACK),
-                        PlayingCard.of(Suit.SPADE, Number.TWO)), true),
+                        Card.of(Suit.HEART, Number.JACK), Card.of(Suit.SPADE, Number.JACK),
+                        Card.of(Suit.SPADE, Number.TWO)), true),
                 Arguments.of(Arrays.asList(
-                        PlayingCard.of(Suit.HEART, Number.ACE), PlayingCard.of(Suit.SPADE, Number.JACK)), false)
+                        Card.of(Suit.HEART, Number.ACE), Card.of(Suit.SPADE, Number.JACK)), false)
         );
     }
 
     @ParameterizedTest
     @DisplayName("is21() 호출 시, 스코어가 21이면 true 를 반환한다.")
     @MethodSource("providerIS21CardsAndExpect")
-    void is21(final List<PlayingCard> cards, final boolean expect) {
+    void is21(final List<Card> cards, final boolean expect) {
         //given
         Score score = Score.of(cards);
 
@@ -102,11 +102,11 @@ class ScoreTest {
     private static Stream<Arguments> providerIS21CardsAndExpect() {
         return Stream.of(
                 Arguments.of(Arrays.asList(
-                        PlayingCard.of(Suit.HEART, Number.ACE), PlayingCard.of(Suit.SPADE, Number.NINE)), false),
+                        Card.of(Suit.HEART, Number.ACE), Card.of(Suit.SPADE, Number.NINE)), false),
                 Arguments.of(Arrays.asList(
-                        PlayingCard.of(Suit.HEART, Number.ACE), PlayingCard.of(Suit.SPADE, Number.JACK)), true),
+                        Card.of(Suit.HEART, Number.ACE), Card.of(Suit.SPADE, Number.JACK)), true),
                 Arguments.of(Arrays.asList(
-                        PlayingCard.of(Suit.HEART, Number.JACK), PlayingCard.of(Suit.SPADE, Number.JACK),
-                        PlayingCard.of(Suit.SPADE, Number.TWO)), false));
+                        Card.of(Suit.HEART, Number.JACK), Card.of(Suit.SPADE, Number.JACK),
+                        Card.of(Suit.SPADE, Number.TWO)), false));
     }
 }

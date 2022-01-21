@@ -2,7 +2,7 @@ package model.participant.state.running;
 
 import model.card.Cards;
 import model.card.vo.Number;
-import model.card.vo.PlayingCard;
+import model.card.vo.Card;
 import model.card.vo.Suit;
 import model.participant.state.State;
 import model.participant.state.finished.Bust;
@@ -23,7 +23,7 @@ class HitTest {
 
     @BeforeEach
     void setUp() {
-        cards = new Cards(new ArrayList<>(Arrays.asList(PlayingCard.of(Suit.CLUB, Number.JACK), PlayingCard.of(Suit.CLUB, Number.NINE))));
+        cards = new Cards(new ArrayList<>(Arrays.asList(Card.of(Suit.CLUB, Number.JACK), Card.of(Suit.CLUB, Number.NINE))));
     }
 
     @Test
@@ -31,10 +31,10 @@ class HitTest {
     void createBustWhenDraw() {
         //given
         State state = new Hit(cards);
-        PlayingCard inputCard = PlayingCard.of(Suit.CLUB, Number.THREE);
+        Card inputCard = Card.of(Suit.CLUB, Number.THREE);
         Cards expectedCards = new Cards(Arrays.asList(
-                PlayingCard.of(Suit.CLUB, Number.JACK), PlayingCard.of(Suit.CLUB, Number.NINE),
-                PlayingCard.of(Suit.CLUB, Number.THREE)));
+                Card.of(Suit.CLUB, Number.JACK), Card.of(Suit.CLUB, Number.NINE),
+                Card.of(Suit.CLUB, Number.THREE)));
 
         //when
         State actualState = state.draw(inputCard);
@@ -48,10 +48,10 @@ class HitTest {
     void createHitWhenDraw() {
         //given
         State state = new Hit(cards);
-        PlayingCard inputCard = PlayingCard.of(Suit.CLUB, Number.TWO);
+        Card inputCard = Card.of(Suit.CLUB, Number.TWO);
         Cards expectedCards = new Cards(Arrays.asList(
-                PlayingCard.of(Suit.CLUB, Number.JACK), PlayingCard.of(Suit.CLUB, Number.NINE),
-                PlayingCard.of(Suit.CLUB, Number.TWO)));
+                Card.of(Suit.CLUB, Number.JACK), Card.of(Suit.CLUB, Number.NINE),
+                Card.of(Suit.CLUB, Number.TWO)));
 
         //when
         State actualState = state.draw(inputCard);
@@ -66,7 +66,7 @@ class HitTest {
         //given
         State state = new Hit(cards);
         Cards expectedCards = new Cards(Arrays.asList(
-                PlayingCard.of(Suit.CLUB, Number.JACK), PlayingCard.of(Suit.CLUB, Number.NINE)));
+                Card.of(Suit.CLUB, Number.JACK), Card.of(Suit.CLUB, Number.NINE)));
 
         //when
         State actualState = state.stay();
@@ -95,7 +95,7 @@ class HitTest {
         State state = new Hit(cards);
         BattingMoney battingMoney = new BattingMoney(1000);
         Cards dealerCards = new Cards(Arrays.asList(
-                PlayingCard.of(Suit.CLUB, Number.JACK), PlayingCard.of(Suit.CLUB, Number.NINE)));
+                Card.of(Suit.CLUB, Number.JACK), Card.of(Suit.CLUB, Number.NINE)));
         //then
         assertThatThrownBy(() -> state.getProfit(battingMoney, dealerCards))
                 .isInstanceOf(IllegalStateException.class)

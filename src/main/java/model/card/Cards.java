@@ -1,23 +1,23 @@
 package model.card;
 
-import model.card.vo.PlayingCard;
+import model.card.vo.Card;
 import model.card.vo.Score;
 
 import java.util.List;
 import java.util.Objects;
 
 public class Cards {
-    private final List<PlayingCard> playingCards;
+    private final List<Card> playingCards;
     private Score score;
 
-    public Cards(final List<PlayingCard> initPlayingCards) {
-        playingCards = initPlayingCards;
-        score = Score.of(initPlayingCards);
+    public Cards(final List<Card> initCards) {
+        playingCards = initCards;
+        score = Score.of(initCards);
     }
 
-    public void add(final PlayingCard inputtedCard) {
+    public void add(final Card inputtedCard) {
         playingCards.add(inputtedCard);
-        this.score = Score.of(getCards());
+        this.score = Score.of(getPlayingCards());
     }
 
     public int getScore() {
@@ -28,7 +28,7 @@ public class Cards {
         return score.isLessThen21();
     }
 
-    public List<PlayingCard> getCards() {
+    public List<Card> getPlayingCards() {
         return playingCards;
     }
 
@@ -45,12 +45,12 @@ public class Cards {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Cards cards = (Cards) o;
-        return Objects.equals(playingCards, cards.playingCards);
+        return Objects.equals(playingCards, cards.playingCards) && Objects.equals(score, cards.score);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(playingCards);
+        return Objects.hash(playingCards, score);
     }
 
     @Override

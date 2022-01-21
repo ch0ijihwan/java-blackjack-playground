@@ -1,7 +1,7 @@
 package model.participant.state.running;
 
 import model.card.Cards;
-import model.card.vo.PlayingCard;
+import model.card.vo.Card;
 import model.participant.state.State;
 import model.participant.state.finished.Bust;
 import model.participant.state.finished.Stay;
@@ -12,7 +12,7 @@ public class Hit extends Running {
     }
 
     @Override
-    public State draw(PlayingCard card) {
+    public State draw(Card card) {
         cards.add(card);
         if (cards.isBurst()) {
             return new Bust(cards);
