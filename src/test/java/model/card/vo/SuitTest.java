@@ -11,7 +11,7 @@ class SuitTest {
     void getValue() {
         //given
         Suit suit = Suit.HEART;
-        String expectedSuit = "heart";
+        String expectedSuit = "Heart";
 
         //when
         String actual = suit.getValue();
