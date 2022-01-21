@@ -1,5 +1,8 @@
-package model.card.vo;
+package model.card.dto;
 
+import model.card.vo.Card;
+import model.card.vo.Number;
+import model.card.vo.Suit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
