@@ -19,8 +19,8 @@ public class Card {
         return this.number.isAce();
     }
 
-    public Number getNumber() {
-        return this.number;
+    public String getSuitValue() {
+        return this.suit.getValue();
     }
 
     public int getNumberValue() {
