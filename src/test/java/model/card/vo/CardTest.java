@@ -9,19 +9,35 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class CardTest {
     @Test
-    @DisplayName("getNumber() 호출 시, 카드 객체의 Number 값을 반환한다.")
-    void getNumber() {
+    @DisplayName("getNumberValue() 호출 시, 카드 객체의 Number 값을 반환한다.")
+    void getNumberValue() {
         //given
         Number inputtedNumber = Number.ACE;
         Suit inputtedSuit = Suit.HEART;
-        Number expectedNumber = Number.ACE;
+        int expectedNumber = 11;
         Card card = Card.of(inputtedSuit, inputtedNumber);
 
         //when
-        Number actualNumber = card.getNumber();
+        int actualNumber = card.getNumberValue();
 
         //then
         assertThat(actualNumber).isEqualTo(expectedNumber);
+    }
+
+    @Test
+    @DisplayName("getNumberSuit() 호출 시, 카드 객체의 Suit 값을 반환한다.")
+    void getNumberSuit() {
+        //given
+        Number inputtedNumber = Number.ACE;
+        Suit inputtedSuit = Suit.HEART;
+        String expectedSuit = "Heart";
+        Card card = Card.of(inputtedSuit, inputtedNumber);
+
+        //when
+        String actualSuit = card.getSuitValue();
+
+        //then
+        assertThat(actualSuit).isEqualTo(expectedSuit);
     }
 
     @ParameterizedTest
