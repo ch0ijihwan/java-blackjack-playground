@@ -16,8 +16,8 @@ public class Blackjack extends Finished {
     @Override
     public int getProfit(BattingMoney battingMoney, Cards dealerCards) {
         if (dealerCards.isBlackJack()) {
-            return (int) (battingMoney.getValue() * 1.5);
+            return 0;
         }
-        return 0;
+        return (int) (battingMoney.getValue() * 1.5);
     }
 }
