@@ -1,15 +1,19 @@
 package view.output;
 
+import model.participant.dto.ParticipantDto;
+
 import java.util.List;
 
 public interface OutputView {
-    void showMessageStartingDraw(final List<String> names);
+    void showMessageStartingDraw(final List<ParticipantDto> participantDtoList);
 
-    void showPlayerCardStatus(final String name, final String cardStatus);
+    void showPlayerCardStatus(final ParticipantDto participantDto);
+
+    void showPlayerCardStatus(final List<ParticipantDto> participantDto);
 
     void showMessageDealerWasDrawing();
 
-    void showCardsResult(final String name, final String cardStatus, final int score);
+    void showCardsResult(final ParticipantDto participantDto);
 
-    void showResultOfDividends(final String name, int dividends);
+    void showResultOfDividends(final ParticipantDto participantDto, int dividends);
 }
