@@ -56,7 +56,7 @@ public class Controller {
     }
 
     private void showAllPlayersCardStatus() {
-        outputView.showPlayerCardStatus(dealerDto);
+        outputView.showDealerOneCardStatus(dealerDto);
         outputView.showPlayerCardStatus(playersDto);
     }
 
