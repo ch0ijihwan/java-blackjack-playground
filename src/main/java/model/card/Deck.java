@@ -1,7 +1,7 @@
 package model.card;
 
-import model.card.vo.Number;
 import model.card.vo.Card;
+import model.card.vo.Number;
 import model.card.vo.Suit;
 
 import java.util.*;
@@ -11,7 +11,6 @@ import static model.card.vo.Card.of;
 
 public class Deck {
     private static final int FIRST_INDEX = 0;
-
     private final List<Card> cards;
 
     public Deck() {
