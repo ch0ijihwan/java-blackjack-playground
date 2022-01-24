@@ -4,7 +4,7 @@ import model.card.Cards;
 import model.participant.vo.BattingMoney;
 
 public class Stay extends Finished {
-    public Stay(Cards cards) {
+    public Stay(final Cards cards) {
         super(cards);
     }
 
@@ -14,7 +14,7 @@ public class Stay extends Finished {
     }
 
     @Override
-    public int getProfit(BattingMoney battingMoney, Cards dealerCards) {
+    public int getProfit(final BattingMoney battingMoney, final Cards dealerCards) {
         if (dealerCards.getScore() == cards.getScore()) {
             return 0;
         } else if (dealerCards.isBurst()) {

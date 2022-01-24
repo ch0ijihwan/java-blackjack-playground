@@ -15,5 +15,7 @@ public interface OutputView {
 
     void showCardsResult(final ParticipantDto participantDto);
 
-    void showResultOfDividends(final ParticipantDto participantDto, int dividends);
+    void showResultOfDividends(final ParticipantDto participantDto, final int dividends);
+
+    void showDealerOneCardStatus(final ParticipantDto dealerDto);
 }

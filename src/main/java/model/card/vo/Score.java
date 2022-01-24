@@ -23,7 +23,7 @@ public class Score {
         return changeAce(score, countOfAce);
     }
 
-    private int countAceCard(List<Card> cards) {
+    private int countAceCard(final List<Card> cards) {
         return (int) cards.stream()
                 .filter(Card::isAce)
                 .count();

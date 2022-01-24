@@ -13,11 +13,11 @@ public class ParticipantDto {
     private final String name;
     private final CardsDto cardsDto;
 
-    public static ParticipantDto from(Participant participant) {
+    public static ParticipantDto from(final Participant participant) {
         return new ParticipantDto(participant.getNameValue(), participant.getCards());
     }
 
-    private ParticipantDto(String name, Cards cards) {
+    private ParticipantDto(final String name, final Cards cards) {
         this.score = cards.getScore();
         this.name = name;
         this.cardsDto = CardsDto.from(cards);

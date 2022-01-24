@@ -4,7 +4,7 @@ import model.card.Cards;
 import model.participant.vo.BattingMoney;
 
 public class Blackjack extends Finished {
-    public Blackjack(Cards initCards) {
+    public Blackjack(final Cards initCards) {
         super(initCards);
     }
 
@@ -14,7 +14,7 @@ public class Blackjack extends Finished {
     }
 
     @Override
-    public int getProfit(BattingMoney battingMoney, Cards dealerCards) {
+    public int getProfit(final BattingMoney battingMoney, final Cards dealerCards) {
         if (dealerCards.isBlackJack()) {
             return 0;
         }

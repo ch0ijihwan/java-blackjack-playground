@@ -8,11 +8,11 @@ public class CardDto {
     private final int number;
     private final String suit;
 
-    public static CardDto from(Card card) {
+    public static CardDto from(final Card card) {
         return new CardDto(card);
     }
 
-    private CardDto(Card card) {
+    private CardDto(final Card card) {
         this.number = card.getNumberValue();
         this.suit = card.getSuitValue();
     }

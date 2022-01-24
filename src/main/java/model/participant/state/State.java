@@ -5,7 +5,7 @@ import model.card.vo.Card;
 import model.participant.vo.BattingMoney;
 
 public interface State {
-    State draw(Card card);
+    State draw(final Card card);
 
     State stay();
 

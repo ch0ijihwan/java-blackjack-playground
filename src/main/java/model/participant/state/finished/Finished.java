@@ -6,11 +6,11 @@ import model.participant.state.Started;
 import model.participant.state.State;
 
 public abstract class Finished extends Started {
-    protected Finished(Cards initCards) {
+    protected Finished(final Cards initCards) {
         super(initCards);
     }
 
-    public State draw(Card card) {
+    public State draw(final Card card) {
         throw new IllegalStateException("게임이 끝난 상태입니다.");
     }
 

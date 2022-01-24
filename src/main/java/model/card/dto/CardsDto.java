@@ -11,11 +11,11 @@ public class CardsDto {
     private final int score;
 
 
-    public static CardsDto from(Cards cards) {
+    public static CardsDto from(final Cards cards) {
         return new CardsDto(cards);
     }
 
-    private CardsDto(Cards cards) {
+    private CardsDto(final Cards cards) {
         cardDtoList = cards.getPlayingCards()
                 .stream()
                 .map(CardDto::from)

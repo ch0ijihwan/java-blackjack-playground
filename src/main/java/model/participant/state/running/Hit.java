@@ -7,12 +7,12 @@ import model.participant.state.finished.Bust;
 import model.participant.state.finished.Stay;
 
 public class Hit extends Running {
-    public Hit(Cards initCards) {
+    public Hit(final Cards initCards) {
         super(initCards);
     }
 
     @Override
-    public State draw(Card card) {
+    public State draw(final Card card) {
         cards.add(card);
         if (cards.isBurst()) {
             return new Bust(cards);

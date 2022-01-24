@@ -8,11 +8,11 @@ public enum DrawingCardAnswer {
     NO("n");
     private final String value;
 
-    DrawingCardAnswer(String value) {
+    DrawingCardAnswer(final String value) {
         this.value = value;
     }
 
-    public static DrawingCardAnswer of(String value) {
+    public static DrawingCardAnswer of(final String value) {
         return Arrays.stream(values())
                 .filter(drawingCardAnswer -> Objects.equals(drawingCardAnswer.value, value))
                 .findAny()

@@ -7,7 +7,7 @@ import java.util.Objects;
 public abstract class Started implements State {
     protected final Cards cards;
 
-    protected Started(Cards initCards) {
+    protected Started(final Cards initCards) {
         this.cards = initCards;
     }
 
