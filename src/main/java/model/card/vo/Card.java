@@ -20,11 +20,11 @@ public class Card {
     }
 
     public String getSuitValue() {
-        return this.suit.getValue();
+        return suit.getValue();
     }
 
     public int getNumberValue() {
-        return this.number.getValue();
+        return number.getValue();
     }
 
     @Override
