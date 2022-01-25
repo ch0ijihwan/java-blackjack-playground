@@ -10,7 +10,8 @@ public class Dealer extends Participant {
     }
 
     public int getScore() {
-        return state.getCards().getScore();
+        return state.getCards()
+                .getScore();
     }
 
     @Override
