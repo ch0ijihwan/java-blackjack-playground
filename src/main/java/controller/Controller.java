@@ -21,7 +21,7 @@ public class Controller {
     private List<ParticipantDto> playersDto;
     private ParticipantDto dealerDto;
 
-    public Controller(InputView inputView, OutputView outputView) {
+    public Controller(final InputView inputView, final OutputView outputView) {
         this.inputView = inputView;
         this.outputView = outputView;
     }
