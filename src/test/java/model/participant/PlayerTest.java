@@ -2,7 +2,7 @@ package model.participant;
 
 import model.card.Cards;
 import model.card.vo.Number;
-import model.card.vo.PlayingCard;
+import model.card.vo.Card;
 import model.card.vo.Suit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -16,7 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static model.card.vo.PlayingCard.of;
+import static model.card.vo.Card.of;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class PlayerTest {
@@ -48,7 +48,7 @@ class PlayerTest {
     @DisplayName("getCards() 실행 시, cards 를 반환한다.")
     void getCards() {
         //given
-        List<PlayingCard> inputtedCards = List.of(of(Suit.SPADE, Number.ACE), of(Suit.HEART, Number.SEVEN));
+        List<Card> inputtedCards = List.of(of(Suit.SPADE, Number.ACE), of(Suit.HEART, Number.SEVEN));
         //when
         Cards actual = player.getCards();
 
@@ -60,7 +60,7 @@ class PlayerTest {
     @DisplayName("draw() 호출 시, 파라미터로부터 입력 받은 카드 한장을 카드 리스트에 추가한다.")
     void draw() {
         //given
-        List<PlayingCard> expectedCards = Arrays.asList(
+        List<Card> expectedCards = Arrays.asList(
                 of(Suit.SPADE, Number.ACE),
                 of(Suit.HEART, Number.SEVEN),
                 of(Suit.CLUB, Number.SEVEN)

@@ -1,5 +1,7 @@
 package view.input;
 
+import model.participant.dto.ParticipantDto;
+
 import java.util.Scanner;
 
 public class ConsoleInput implements InputView {
@@ -22,8 +24,8 @@ public class ConsoleInput implements InputView {
     }
 
     @Override
-    public DrawingCardAnswer inputDrawMoreCard(final String name) {
-        System.out.println(name + "는 한장의 카드를 더 받겠습니까?(예는 y, 아니오는 n)");
+    public DrawingCardAnswer inputDrawMoreCard(final ParticipantDto participantDto) {
+        System.out.println(participantDto.getName() + "는 한장의 카드를 더 받겠습니까?(예는 y, 아니오는 n)");
 
         return DrawingCardAnswer.of(scanner.next());
     }

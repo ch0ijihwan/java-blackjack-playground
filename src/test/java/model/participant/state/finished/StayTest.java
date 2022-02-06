@@ -2,7 +2,7 @@ package model.participant.state.finished;
 
 import model.card.Cards;
 import model.card.vo.Number;
-import model.card.vo.PlayingCard;
+import model.card.vo.Card;
 import model.card.vo.Suit;
 import model.participant.state.State;
 import model.participant.vo.BattingMoney;
@@ -24,7 +24,7 @@ class StayTest {
 
     @BeforeEach
     void setUp() {
-        cards = new Cards(Arrays.asList(PlayingCard.of(Suit.CLUB, Number.JACK), PlayingCard.of(Suit.CLUB, Number.NINE)));
+        cards = new Cards(Arrays.asList(Card.of(Suit.CLUB, Number.JACK), Card.of(Suit.CLUB, Number.NINE)));
     }
 
     @Test
@@ -34,7 +34,7 @@ class StayTest {
         State state = new Stay(cards);
 
         //then
-        assertThatThrownBy(() -> state.draw(PlayingCard.of(Suit.CLUB, Number.TWO))).isInstanceOf(IllegalStateException.class)
+        assertThatThrownBy(() -> state.draw(Card.of(Suit.CLUB, Number.TWO))).isInstanceOf(IllegalStateException.class)
                 .hasMessage("게임이 끝난 상태입니다.");
     }
 
@@ -82,16 +82,16 @@ class StayTest {
 
     static Stream<Arguments> dealerCardsAndExpectedProfitProvider() {
         return Stream.of(
-                Arguments.of(new Cards(Arrays.asList(PlayingCard.of(Suit.CLUB, Number.JACK),
-                        PlayingCard.of(Suit.CLUB, Number.NINE))), 0),
-                Arguments.of(new Cards(Arrays.asList(PlayingCard.of(Suit.CLUB, Number.JACK),
-                        PlayingCard.of(Suit.CLUB, Number.ACE))), -10),
-                Arguments.of(new Cards(Arrays.asList(PlayingCard.of(Suit.CLUB, Number.JACK),
-                        PlayingCard.of(Suit.CLUB, Number.JACK))), -10),
-                Arguments.of(new Cards(Arrays.asList(PlayingCard.of(Suit.CLUB, Number.JACK),
-                        PlayingCard.of(Suit.CLUB, Number.EIGHT))), 10),
-                Arguments.of(new Cards(Arrays.asList(PlayingCard.of(Suit.CLUB, Number.JACK),
-                        PlayingCard.of(Suit.CLUB, Number.JACK),
-                        PlayingCard.of(Suit.CLUB, Number.TWO))), 10));
+                Arguments.of(new Cards(Arrays.asList(Card.of(Suit.CLUB, Number.JACK),
+                        Card.of(Suit.CLUB, Number.NINE))), 0),
+                Arguments.of(new Cards(Arrays.asList(Card.of(Suit.CLUB, Number.JACK),
+                        Card.of(Suit.CLUB, Number.ACE))), -10),
+                Arguments.of(new Cards(Arrays.asList(Card.of(Suit.CLUB, Number.JACK),
+                        Card.of(Suit.CLUB, Number.JACK))), -10),
+                Arguments.of(new Cards(Arrays.asList(Card.of(Suit.CLUB, Number.JACK),
+                        Card.of(Suit.CLUB, Number.EIGHT))), 10),
+                Arguments.of(new Cards(Arrays.asList(Card.of(Suit.CLUB, Number.JACK),
+                        Card.of(Suit.CLUB, Number.JACK),
+                        Card.of(Suit.CLUB, Number.TWO))), 10));
     }
 }

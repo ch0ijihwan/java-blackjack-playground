@@ -1,10 +1,10 @@
 package model.card.vo;
 
 public enum Suit {
-    SPADE("spade"),
-    HEART("heart"),
-    DIAMOND("diamond"),
-    CLUB("club");
+    SPADE("Spade"),
+    HEART("Heart"),
+    DIAMOND("Diamond"),
+    CLUB("Club");
 
     private final String value;
 

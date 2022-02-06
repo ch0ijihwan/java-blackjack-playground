@@ -7,25 +7,25 @@ public class Score {
     private static final int DIFFERENCE_IN_CHANGE_OF_ACE = 10;
     private final int value;
 
-    public static Score of(final List<PlayingCard> cards) {
+    public static Score of(final List<Card> cards) {
         return new Score(cards);
     }
 
-    private Score(final List<PlayingCard> cards) {
+    private Score(final List<Card> cards) {
         value = calculateTotalScore(cards);
     }
 
-    private int calculateTotalScore(final List<PlayingCard> cards) {
+    private int calculateTotalScore(final List<Card> cards) {
         int countOfAce = countAceCard(cards);
         int score = cards.stream()
-                .mapToInt(PlayingCard::getNumberValue)
+                .mapToInt(Card::getNumberValue)
                 .sum();
         return changeAce(score, countOfAce);
     }
 
-    private int countAceCard(List<PlayingCard> cards) {
+    private int countAceCard(final List<Card> cards) {
         return (int) cards.stream()
-                .filter(PlayingCard::isAce)
+                .filter(Card::isAce)
                 .count();
     }
 

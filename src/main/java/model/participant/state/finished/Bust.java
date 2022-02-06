@@ -4,7 +4,7 @@ import model.card.Cards;
 import model.participant.vo.BattingMoney;
 
 public class Bust extends Finished {
-    public Bust(Cards cards) {
+    public Bust(final Cards cards) {
         super(cards);
     }
 
@@ -14,7 +14,7 @@ public class Bust extends Finished {
     }
 
     @Override
-    public int getProfit(BattingMoney battingMoney, Cards dealerCards) {
+    public int getProfit(final BattingMoney battingMoney, final Cards dealerCards) {
         if (dealerCards.isBurst()) {
             return 0;
         }

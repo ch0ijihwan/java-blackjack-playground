@@ -4,21 +4,14 @@ import model.card.Cards;
 import model.participant.state.running.Hit;
 
 public class Dealer extends Participant {
-    private static final int FIRST_CARD_INDEX = 0;
-
     public Dealer(final Cards initCards) {
         super("딜러");
         state = new Hit(initCards);
     }
 
-    public String getOneCardStatus() {
-        return state.getCards()
-                .getCards()
-                .get(FIRST_CARD_INDEX).toString();
-    }
-
     public int getScore() {
-        return state.getCards().getScore();
+        return state.getCards()
+                .getScore();
     }
 
     @Override

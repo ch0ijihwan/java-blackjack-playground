@@ -1,11 +1,11 @@
 package model.participant.state;
 
 import model.card.Cards;
-import model.card.vo.PlayingCard;
+import model.card.vo.Card;
 import model.participant.vo.BattingMoney;
 
 public interface State {
-    State draw(PlayingCard card);
+    State draw(final Card card);
 
     State stay();
 

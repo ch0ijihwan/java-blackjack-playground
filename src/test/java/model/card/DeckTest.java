@@ -1,6 +1,6 @@
 package model.card;
 
-import model.card.vo.PlayingCard;
+import model.card.vo.Card;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -39,7 +39,7 @@ class DeckTest {
         int expectedNumberOfCards = 51;
 
         //when
-        PlayingCard card = deck.provideCard();
+        Card card = deck.provideCard();
 
         //then
         assertThat(deck).extracting("cards")
@@ -72,6 +72,6 @@ class DeckTest {
         Cards actualStartingCards = deck.startingDraw();
 
         //then
-        assertThat(actualStartingCards.getCards().size()).isEqualTo(expectedNumberOfCards);
+        assertThat(actualStartingCards.getPlayingCards().size()).isEqualTo(expectedNumberOfCards);
     }
 }

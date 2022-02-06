@@ -1,21 +1,20 @@
 package model.card;
 
+import model.card.vo.Card;
 import model.card.vo.Number;
-import model.card.vo.PlayingCard;
 import model.card.vo.Suit;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static model.card.vo.PlayingCard.of;
+import static model.card.vo.Card.of;
 
 public class Deck {
     private static final int FIRST_INDEX = 0;
-
-    private final List<PlayingCard> cards;
+    private final List<Card> cards;
 
     public Deck() {
-        List<List<PlayingCard>> cardsListBySuit = Arrays.stream(Suit.values())
+        List<List<Card>> cardsListBySuit = Arrays.stream(Suit.values())
                 .map(this::createNumberCards)
                 .collect(Collectors.toUnmodifiableList());
         cards = cardsListBySuit.stream()
@@ -24,13 +23,13 @@ public class Deck {
         Collections.shuffle(cards);
     }
 
-    private List<PlayingCard> createNumberCards(final Suit suit) {
+    private List<Card> createNumberCards(final Suit suit) {
         return Arrays.stream(Number.values())
                 .map(number -> of(suit, number))
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    public PlayingCard provideCard() {
+    public Card provideCard() {
         if (cards.isEmpty()) {
             throw new IllegalStateException("덱에 카드가 없는 상태입니다. 카드를 뽑을 수 없습니다.");
         }

@@ -2,7 +2,7 @@ package model.participant;
 
 import model.card.Cards;
 import model.card.vo.Number;
-import model.card.vo.PlayingCard;
+import model.card.vo.Card;
 import model.card.vo.Suit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static model.card.vo.PlayingCard.of;
+import static model.card.vo.Card.of;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class DealerTest {
@@ -37,7 +37,7 @@ class DealerTest {
         //given
         Dealer dealer = new Dealer(new Cards(
                 new ArrayList<>(Arrays.asList(of(Suit.HEART, Number.SEVEN), of(Suit.HEART, Number.TWO)))));
-        PlayingCard inputtedCard = of(Suit.SPADE, Number.KING);
+        Card inputtedCard = of(Suit.SPADE, Number.KING);
         Cards expect = new Cards(new ArrayList<>(Arrays.asList(
                 of(Suit.HEART, Number.SEVEN), of(Suit.HEART, Number.TWO), of(Suit.SPADE, Number.KING)
         )));

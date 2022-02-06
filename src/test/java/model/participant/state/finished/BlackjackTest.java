@@ -2,7 +2,7 @@ package model.participant.state.finished;
 
 import model.card.Cards;
 import model.card.vo.Number;
-import model.card.vo.PlayingCard;
+import model.card.vo.Card;
 import model.card.vo.Suit;
 import model.participant.state.State;
 import model.participant.vo.BattingMoney;
@@ -24,7 +24,7 @@ class BlackjackTest {
 
     @BeforeEach
     void setUp() {
-        cards = new Cards(Arrays.asList(PlayingCard.of(Suit.CLUB, Number.ACE), PlayingCard.of(Suit.CLUB, Number.JACK)));
+        cards = new Cards(Arrays.asList(Card.of(Suit.CLUB, Number.ACE), Card.of(Suit.CLUB, Number.JACK)));
     }
 
     @ParameterizedTest
@@ -45,9 +45,9 @@ class BlackjackTest {
     private static Stream<Arguments> dealerCardsAndExpectedProfitProvider() {
         return Stream.of(
                 Arguments.of(
-                        new Cards(Arrays.asList(PlayingCard.of(Suit.CLUB, Number.ACE), PlayingCard.of(Suit.CLUB, Number.JACK))), 15),
+                        new Cards(Arrays.asList(Card.of(Suit.CLUB, Number.ACE), Card.of(Suit.CLUB, Number.JACK))), 0),
                 Arguments.of(
-                        new Cards(Arrays.asList(PlayingCard.of(Suit.CLUB, Number.JACK), PlayingCard.of(Suit.CLUB, Number.JACK))), 0
+                        new Cards(Arrays.asList(Card.of(Suit.CLUB, Number.JACK), Card.of(Suit.CLUB, Number.JACK))), 15
                 ));
     }
 
@@ -82,7 +82,7 @@ class BlackjackTest {
         State state = new Blackjack(cards);
 
         //then
-        assertThatThrownBy(() -> state.draw(PlayingCard.of(Suit.CLUB, Number.THREE))).isInstanceOf(IllegalStateException.class)
+        assertThatThrownBy(() -> state.draw(Card.of(Suit.CLUB, Number.THREE))).isInstanceOf(IllegalStateException.class)
                 .hasMessage("게임이 끝난 상태입니다.");
     }
 }

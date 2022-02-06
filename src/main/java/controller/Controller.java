@@ -3,7 +3,7 @@ package controller;
 import model.card.Deck;
 import model.participant.Dealer;
 import model.participant.Player;
-import model.participant.state.State;
+import model.participant.dto.ParticipantDto;
 import view.input.DrawingCardAnswer;
 import view.input.InputView;
 import view.output.OutputView;
@@ -17,10 +17,11 @@ public class Controller {
     private final Dealer dealer = new Dealer(deck.startingDraw());
     private final InputView inputView;
     private final OutputView outputView;
-    private State state;
     private List<Player> players;
+    private List<ParticipantDto> playersDto;
+    private ParticipantDto dealerDto;
 
-    public Controller(InputView inputView, OutputView outputView) {
+    public Controller(final InputView inputView, final OutputView outputView) {
         this.inputView = inputView;
         this.outputView = outputView;
     }
@@ -29,15 +30,23 @@ public class Controller {
         setUpGame();
         drawAllPlayer(players);
         drawOneCardDealer();
-        showAllResultOfBattles(players);
+        showAllResultOfBattles();
         showAllResultOfDividends(players);
     }
 
     private void setUpGame() {
         String[] inputtedPlayerNames = inputView.inputPlayerNames();
         this.players = setUpPlayers(inputtedPlayerNames);
-        outputView.showMessageStartingDraw(getPlayerNames(players));
-        showAllPlayersCardStatus(players);
+        upDateDto();
+        outputView.showMessageStartingDraw(playersDto);
+        showAllPlayersCardStatus();
+    }
+
+    private void upDateDto() {
+        this.playersDto = players.stream()
+                .map(ParticipantDto::from)
+                .collect(Collectors.toUnmodifiableList());
+        this.dealerDto = ParticipantDto.from(dealer);
     }
 
     private List<Player> setUpPlayers(final String[] inputtedPlayerNames) {
@@ -46,15 +55,9 @@ public class Controller {
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    private List<String> getPlayerNames(final List<Player> players) {
-        return players.stream()
-                .map(Player::getNameValue)
-                .collect(Collectors.toUnmodifiableList());
-    }
-
-    private void showAllPlayersCardStatus(final List<Player> players) {
-        outputView.showPlayerCardStatus(dealer.getNameValue(), dealer.getOneCardStatus());
-        players.forEach(player -> outputView.showPlayerCardStatus(player.getNameValue(), player.getCards().toString()));
+    private void showAllPlayersCardStatus() {
+        outputView.showDealerOneCardStatus(dealerDto);
+        outputView.showPlayerCardStatus(playersDto);
     }
 
     private void drawAllPlayer(final List<Player> players) {
@@ -62,9 +65,13 @@ public class Controller {
     }
 
     private void drawOrStay(final Player player) {
-        while (player.canDrawCard() && inputView.inputDrawMoreCard(player.getNameValue()).equals(DrawingCardAnswer.YES)) {
+        while (player.canDrawCard() && inputView.inputDrawMoreCard(ParticipantDto.from(player)) == (DrawingCardAnswer.YES)) {
             player.draw(deck.provideCard());
-            outputView.showPlayerCardStatus(player.getNameValue(), player.getCards().toString());
+            upDateDto();
+            outputView.showPlayerCardStatus(playersDto);
+        }
+        if (player.canDrawCard()) {
+            player.stay();
         }
     }
 
@@ -75,16 +82,20 @@ public class Controller {
         }
     }
 
-    private void showAllResultOfBattles(final List<Player> players) {
-        outputView.showCardsResult("딜러", dealer.getCards().toString(), dealer.getScore());
-        players.forEach(player -> outputView.showCardsResult(player.getNameValue(), player.getCards().toString(), player.getCards().getScore()));
+    private void showAllResultOfBattles() {
+        outputView.showCardsResult(dealerDto);
+        playersDto.forEach(outputView::showCardsResult);
+
     }
 
     private void showAllResultOfDividends(final List<Player> players) {
-        players.forEach(Player::stay);
-        players.forEach(player -> outputView.showResultOfDividends(player.getNameValue(), player.getDividends(dealer.getCards())));
+        players.forEach(this::showResultOfOneParticipantDividends);
         int dealersDividends = players.stream()
                 .mapToInt(player -> player.getDividends(dealer.getCards())).sum() * -1;
-        outputView.showResultOfDividends("딜러", dealersDividends);
+        outputView.showResultOfDividends(dealerDto, dealersDividends);
+    }
+
+    private void showResultOfOneParticipantDividends(final Player player) {
+        outputView.showResultOfDividends(ParticipantDto.from(player), player.getDividends(dealer.getCards()));
     }
 }
